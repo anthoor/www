@@ -13,15 +13,18 @@ This repo contains in-development code for future releases. To download stable s
 **************************
 Changelog and New Features
 **************************
+###### Changelog
+* Updated Readme
 
+###### Current Features
 Guest
 -----
-1. View List of Available Books
+* View List of Available Books
 
 Librarian
 ---------
-1. Login
-2. View Lists
+* Login
+* View Lists
   * Books
   * Authors
   * Publishers
@@ -41,15 +44,14 @@ issues, as well as missing features.
 Installation
 ************
 
-Please see the `installation section <http://www.codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+To install this software, copy the source tree into your server's root directory. The database with sample values are given in `db_backup` folder. Import it into your database. Configure your dabase parameters in the file `config\database.php`.
 
 *******
 License
 *******
 
 Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+agreement <https://github.com/lalluanthoor/www/license.rst>`_.
 
 *********
 Resources
@@ -67,5 +69,5 @@ Report security issues to our `Security Panel <mailto:security@codeigniter.com>`
 Acknowledgement
 ***************
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+I would like to thank The CodeIgniter team, EllisLab, all the
+contributors to the CodeIgniter project and you, the CSEDL Manager user.
