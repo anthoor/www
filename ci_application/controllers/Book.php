@@ -1,0 +1,39 @@
+<?php
+
+class Book extends CI_Controller {
+	public function __construct() {
+		parent::__construct();
+		$this->load->model('book_model');
+	}
+
+	public function index() {
+		$data['title'] = "Availabe Books";
+		$data['books'] = $this->book_model->get_books();
+		$data['authors'] = $this->book_model->get_authors();
+		$active = array();
+		$active['home'] = "";
+		$active['login'] = "";
+		$active['view'] = "active";
+		$data['active'] = $active;
+
+		$this->load->helper('url');
+		$this->load->view('templates/header', $data);
+		$this->load->view('book/index', $data);
+		$this->load->view('templates/footer', $data);
+	}
+
+	public function view() {
+		$data['title'] = "Availabe Books";
+		$data['books'] = $this->book_model->get_books();
+		$data['authors'] = $this->book_model->get_authors();
+		$active = array();
+		$active['home'] = "";
+		$active['login'] = "";
+		$active['view'] = "active";
+		$data['active'] = $active;
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('book/index', $data);
+		$this->load->view('templates/footer', $data);
+	}
+}
