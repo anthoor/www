@@ -13,14 +13,23 @@ This repo contains in-development code for future releases. To download stable s
 **************************
 Changelog and New Features
 **************************
-###### Changelog
+
+=========
+Changelog
+=========
+
 * Updated Readme
 
-###### Current Features
+================
+Current Features
+================
+
+-----
 Guest
 -----
 * View List of Available Books
 
+---------
 Librarian
 ---------
 * Login
@@ -51,11 +60,11 @@ License
 *******
 
 Please see the `license
-agreement <https://github.com/lalluanthoor/www/license.rst>`_.
+agreement <https://github.com/lalluanthoor/www/blob/master/license.txt>`_.
 
-*********
-Resources
-*********
+************
+CI Resources
+************
 
 -  `User Guide <http://www.codeigniter.com/docs>`_
 -  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
@@ -63,7 +72,7 @@ Resources
 -  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
 -  `Community IRC <http://www.codeigniter.com/irc>`_
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_, thank you.
+Report security issues to `Security Panel <mailto:security@codeigniter.com>`_, thank you.
 
 ***************
 Acknowledgement
