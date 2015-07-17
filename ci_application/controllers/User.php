@@ -16,6 +16,7 @@ class User extends CI_Controller {
 			$active['home'] = "active";
 			$active['books'] = "";
 			$active['stats'] = "";
+			$active['view'] = "";
 			$data['active'] = $active;
 
 			$this->load->view('templates/uheader', $data);

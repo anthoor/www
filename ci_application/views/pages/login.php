@@ -20,7 +20,6 @@
 						value="<?php echo set_value('password'); ?>"
 						placeholder="Password" />
 				</div>
-				<input type="hidden" name="usertype" value="101" />
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
 					<?php echo validation_errors(); ?>
 				</div>

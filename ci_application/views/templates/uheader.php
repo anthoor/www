@@ -34,9 +34,13 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
+							<li class="dropdown-header">Add Section</li>
 							<li><a href="/index.php/librarian/view/addbook">Add Book</a></li>
 							<li><a href="/index.php/librarian/view/addcopy">Add Copies</a></li>
+							<li><a href="/index.php/librarian/view/addauthor">Add Author</a></li>
+							<li><a href="/index.php/librarian/view/addpublisher">Add Publisher</a></li>
 							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Remove Section</li>
 							<li><a href="/index.php/librarian/view/damagecopy">Report Damage</a></li>
 							<li><a href="/index.php/librarian/view/removecopy">Remove Copies</a></li>
 						</ul>
@@ -48,10 +52,26 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
+							<li class="dropdown-header">Issue Section</li>
 							<li><a href="/index.php/librarian/view/issue">Issue Book</a></li>
 							<li><a href="/index.php/librarian/view/renew">Issue Renewal</a></li>
 							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Return Section</li>
 							<li><a href="/index.php/librarian/view/return">Return Book</a></li>
+						</ul>
+					</li>
+					<li class="<?php echo $active['view']; ?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-book"></span>
+							View
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">View Section</li>
+							<li><a href="/index.php/librarian/view/viewpublishers">View Publishers</a></li>
+							<li><a href="/index.php/librarian/view/viewauthors">View Authors</a></li>
+							<li><a href="/index.php/librarian/view/viewbooks">View Available Books</a></li>
+							<li><a href="/index.php/librarian/view/viewallbooks">View All Books</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -3,6 +3,11 @@
 class Book_model extends CI_Model {
 
 	public function get_books() {
+		$query = $this->db->query("SELECT book.id as id, title, publisher.name as pub, edition, year, COUNT(*) as count FROM book, copy, publisher WHERE book.id = copy.book_id AND book.publisher = publisher.id AND copy.status='A' GROUP BY copy.book_id");
+		return $query;
+	}
+
+	public function get_all_books() {
 		$query = $this->db->query("SELECT book.id as id, title, publisher.name as pub, edition, year, COUNT(*) as count FROM book, copy, publisher WHERE book.id = copy.book_id AND book.publisher = publisher.id GROUP BY copy.book_id");
 		return $query;
 	}
@@ -10,7 +15,6 @@ class Book_model extends CI_Model {
 	public function get_authors( ) {
 		$query = $this->db->query("SELECT * FROM written, author WHERE written.author_id = author.id");
 		$authors = array();
-		$i = 0;
 		while( $row = $query->unbuffered_row() ) {
 			if( !isset($authors["$row->book_id"]) ) $authors["$row->book_id"] = array();
 			array_push( $authors["$row->book_id"], "$row->first_name $row->middle_name $row->last_name" );
@@ -19,13 +23,22 @@ class Book_model extends CI_Model {
 		foreach( $authors as $book=>$author ) {
 			$count = count($author);
 			$name = "";
-			$i = 0;
-			for( ; $i<$count-1; $i++ ) {
+			for( $i = 0; $i<$count-1; $i++ ) {
 				$name .= $author[$i].", ";
 			}
 			$name .= $author[$i];
 			$result[$book] = $name;
 		}
 		return $result;
+	}
+
+	public function authors() {
+		$query = $this->db->query( "SELECT first_name, middle_name, last_name, COUNT(book_id) AS count FROM author LEFT OUTER JOIN written ON author.id = written.author_id GROUP BY first_name" );
+		return $query->result_array();
+	}
+
+	public function publishers() {
+		$query = $this->db->query( "SELECT name, COUNT(book.id) AS count FROM publisher LEFT OUTER JOIN book ON publisher.id = book.publisher GROUP BY name" );
+		return $query->result_array();
 	}
 }
