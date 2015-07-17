@@ -67,11 +67,15 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li class="dropdown-header">View Section</li>
+							<li class="dropdown-header">Book Section</li>
 							<li><a href="/index.php/librarian/view/viewpublishers">View Publishers</a></li>
 							<li><a href="/index.php/librarian/view/viewauthors">View Authors</a></li>
-							<li><a href="/index.php/librarian/view/viewbooks">View Available Books</a></li>
-							<li><a href="/index.php/librarian/view/viewallbooks">View All Books</a></li>
+							<li><a href="/index.php/librarian/view/viewbooks/all">View All Books</a></li>
+							<li><a href="/index.php/librarian/view/viewbooks/available">View Available Books</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Issue Section</li>
+							<li><a href="/index.php/librarian/view/viewissues/all">View Issue History</a></li>
+							<li><a href="/index.php/librarian/view/viewissues/pending">View Pending Issues</a></li>
 						</ul>
 					</li>
 				</ul>

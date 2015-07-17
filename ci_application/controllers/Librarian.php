@@ -28,7 +28,8 @@ class Librarian extends CI_Controller {
 		}
 	}
 
-	public function view( $page ) {
+	public function view( $page="viewbooks", $args=array(0=>"all") ) {
+		$data['test'] = "TEST";
 		if( !file_exists(APPPATH."/views/librarian/$page.php") ) {
 			show_404();
 		}
@@ -37,25 +38,26 @@ class Librarian extends CI_Controller {
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 
 			switch( $page ) {
-				case "viewbooks":
-					$data['title'] = "View Available Books";
+//VIEW SECTION
+				case "viewbooks":	
 					$active['home'] = "";
 					$active['books'] = "";
 					$active['stats'] = "";
 					$active['view'] = "active";
 					$data['active'] = $active;
-					$data['authors'] = $this->book_model->get_authors();
-					$data['books'] = $this->book_model->get_books();
-					break;
-				case "viewallbooks":
-					$data['title'] = "View All Books";
-					$active['home'] = "";
-					$active['books'] = "";
-					$active['stats'] = "";
-					$active['view'] = "active";
-					$data['active'] = $active;
-					$data['authors'] = $this->book_model->get_authors();
-					$data['abooks'] = $this->book_model->get_all_books();
+					switch( $args ) {
+						case "available":
+							$data['title'] = "View Available Books";
+							$data['authors'] = $this->book_model->get_authors();
+							$data['books'] = $this->book_model->get_books();
+							$data['toggle'] = "Available";
+							break;
+						default:
+							$data['title'] = "View All Books";
+							$data['authors'] = $this->book_model->get_authors();
+							$data['books'] = $this->book_model->get_all_books();
+							$data['toggle'] = "All";
+					}
 					break;
 				case "viewauthors":
 					$data['title'] = "View Authors";
@@ -75,6 +77,26 @@ class Librarian extends CI_Controller {
 					$data['active'] = $active;
 					$data['publishers'] = $this->book_model->publishers();
 					break;
+				case "viewissues":	
+					$active['home'] = "";
+					$active['books'] = "";
+					$active['stats'] = "";
+					$active['view'] = "active";
+					$data['active'] = $active;
+					switch( $args ) {
+						case "pending":
+							$data['title'] = "View Pending Issues";
+							$data['issues'] = $this->book_model->pending_issues();
+							$data['toggle'] = "Pending";
+							break;
+						default:
+							$data['title'] = "View All Issues";
+							$data['issues'] = $this->book_model->issues();
+							$data['toggle'] = "History";
+					}
+					break;
+
+//OPERATION SECTION
 				case "addbook":
 					$data['title'] = "Add Book";
 					$active['home'] = "";

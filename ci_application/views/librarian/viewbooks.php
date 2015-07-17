@@ -1,6 +1,6 @@
 <div class="jumbotron">
 	<div style="float:left"><img src="<?php echo base_url()."css/logo.png"; ?>" alt="csdl" height="150px" /></div>
-	<h1>List of Books<small> (Available)</small><br><small>CSE Department Library</small></h1>
+	<h1>List of Books<small> (<?= $toggle ?>)</small><br><small>CSE Department Library</small></h1>
 </div>
 
 <div class="">

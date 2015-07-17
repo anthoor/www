@@ -41,4 +41,16 @@ class Book_model extends CI_Model {
 		$query = $this->db->query( "SELECT name, COUNT(book.id) AS count FROM publisher LEFT OUTER JOIN book ON publisher.id = book.publisher GROUP BY name" );
 		return $query->result_array();
 	}
+
+	public function issues() {
+		$string = "SELECT issue.copy_id, issue.date, book.title, user.full_name FROM issue, book, copy, user WHERE issue.user_id = user.id AND copy.book_id = book.id AND issue.copy_id = copy.id";
+		$query = $this->db->query( $string );
+		return $query->result_array();
+	}
+
+	public function pending_issues() {
+		$string = "SELECT issue.id, issue.copy_id, issue.date, book.title, user.full_name FROM issue, book, copy, user WHERE issue.user_id = user.id AND copy.book_id = book.id AND issue.copy_id = copy.id AND issue.id NOT IN (SELECT issue_id FROM `return`)";
+		$query = $this->db->query( $string );
+		return $query->result_array();
+	}
 }
