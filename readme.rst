@@ -56,7 +56,7 @@ MySQL 5.6 is used for the development. It will run fine for MySQL 5.5 or above.
 Installation
 ************
 
-To install this software, copy the source tree into your server's root directory. The database with sample values are given in ``db_backup`` folder. Import it into your database. Configure your dabase parameters in the file ``config/database.php``.
+To install this software, copy the source tree into your server's root directory. The database with sample values are given in ``db_backup`` folder. Import it into your database. Configure your dabase parameters in the file ``ci_application/config/database.php``.
 
 *******
 License
@@ -81,5 +81,5 @@ Report security issues to `Security Panel <mailto:security@codeigniter.com>`_, t
 Acknowledgement
 ***************
 
-I would like to thank The CodeIgniter team, EllisLab, all the
+I would like to thank The CodeIgniter team, EllisLab, DataTables team,  all the
 contributors to the CodeIgniter project and you, the CSEDL Manager user.

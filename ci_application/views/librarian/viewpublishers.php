@@ -4,12 +4,15 @@
 </div>
 
 <div class="">
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-hover" id="tableid">
+		<thead>
 		<tr>
 			<th width="50">Sl No</th>
 			<th>Publisher</th>
 			<th>No of Titles</th>
 		</tr>
+		</thead>
+		<tbody>
 		<?php $i = 1; ?>
 		<?php foreach( $publishers as $pub ): ?>
 			<tr>
@@ -19,6 +22,12 @@
 			</tr>
 			<?php $i++; ?>
 		<?php endforeach ?>
+		</tbody>
 	</table>
 	<div>&nbsp;</div>
 </div>
+<script>
+$(document).ready(function(){
+	$('#tableid').DataTable();
+});
+</script>

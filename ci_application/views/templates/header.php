@@ -2,8 +2,12 @@
 	<head>
 		<title><?php echo $title; ?></title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/spacelab.min.css"; ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.css"; ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.bootstrap.css"; ?>" />
 		<script src="<?php echo base_url()."js/jquery.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/bootstrap.min.js"; ?>"></script>
+		<script src="<?php echo base_url()."js/datatables.js"; ?>"></script>
+		<script src="<?php echo base_url()."js/datatables.bootstrap.js"; ?>"></script>
 		<style>
 			body {
 				padding-top:70px;

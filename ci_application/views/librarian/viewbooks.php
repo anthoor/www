@@ -4,13 +4,16 @@
 </div>
 
 <div class="">
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-hover" id="tableid">
+		<thead>
 		<tr>
 			<th>Book</th>
 			<th>Authors</th>
 			<th>Publisher</th>
 			<th>Count</th>
 		</tr>
+		</thead>
+		<tbody>
 		<?php while( $book = $books->unbuffered_row() ): ?>
 			<tr>
 				<td><?php echo $book->title." - Ed. ".$book->edition." (".$book->year.")"; ?></td>
@@ -19,5 +22,12 @@
 				<td align="center"><?php echo $book->count; ?></td>
 			</tr>
 		<?php endwhile ?>
+		</tbody>
 	</table>
+	<div>&nbsp;</div>
 </div>
+<script>
+$(document).ready(function(){
+	$('#tableid').DataTable();
+});
+</script>
