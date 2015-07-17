@@ -16,12 +16,12 @@ Changelog and New Features
 
 Guest
 -----
-* View List of Available Books
+1. View List of Available Books
 
 Librarian
 ---------
-* Login
-* View Lists
+1. Login
+2. View Lists
 ..* Books
 ..* Authors
 ..* Publishers
