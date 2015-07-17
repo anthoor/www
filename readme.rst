@@ -2,7 +2,7 @@
 What is CSEDL Manager
 #####################
 
-CSEDL Manager is a library management software designed exclusively for the management of the department library of Computer Science and Engineering department of Malabar Institute of Technology, Anjarakandy. This is developed as a time pass project by me and should be considered only at that level. The purpose behind the creation of this software is to familiarize MVC programming using the amazing framework called CodeIgniter.
+CSEDL Manager is a library management software designed exclusively for the management of the department library of Computer Science and Engineering department of Malabar Institute of Technology, Anjarakandy. The purpose behind the creation of this software is to familiarize MVC programming using the amazing framework called CodeIgniter. This is developed as a time pass project by me and should be considered only at that level.
 
 *******************
 Release Information
@@ -50,11 +50,13 @@ It should work on 5.2.4 as well, but we strongly advise you NOT to run
 such old versions of PHP, because of potential security and performance
 issues, as well as missing features.
 
+MySQL 5.6 is used for the development. It will run fine for MySQL 5.5 or above.
+
 ************
 Installation
 ************
 
-To install this software, copy the source tree into your server's root directory. The database with sample values are given in `db_backup` folder. Import it into your database. Configure your dabase parameters in the file `config\database.php`.
+To install this software, copy the source tree into your server's root directory. The database with sample values are given in ``db_backup`` folder. Import it into your database. Configure your dabase parameters in the file ``config/database.php``.
 
 *******
 License
