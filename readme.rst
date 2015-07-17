@@ -22,10 +22,10 @@ Librarian
 ---------
 1. Login
 2. View Lists
-..* Books
-..* Authors
-..* Publishers
-..* Issues
+  * Books
+  * Authors
+  * Publishers
+  * Issues
 
 *******************
 Server Requirements
