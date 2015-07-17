@@ -34,10 +34,11 @@ Librarian
 ---------
 * Login
 * View Lists
-  * Books
-  * Authors
-  * Publishers
-  * Issues
+
+   * Books
+   * Authors
+   * Publishers
+   * Issues
 
 *******************
 Server Requirements
