@@ -16,12 +16,16 @@ Changelog and New Features
 
 Guest
 -----
->View List of Available Books
+* View List of Available Books
 
 Librarian
 ---------
->Login
->View lists of books, publishers, authors, issues, etc.
+* Login
+* View Lists
+..* Books
+..* Authors
+..* Publishers
+..* Issues
 
 *******************
 Server Requirements
