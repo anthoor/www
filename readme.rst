@@ -18,7 +18,11 @@ Changelog and New Features
 Changelog
 =========
 
-* Updated Readme
+* Added DataTables for displaying tables
+* Separated User and Librarian views
+* Completed User->View menu
+* Completed Librarian->View menu
+* UI completed for Librarian->Books menu
 
 ================
 Current Features
@@ -50,7 +54,7 @@ It should work on 5.2.4 as well, but we strongly advise you NOT to run
 such old versions of PHP, because of potential security and performance
 issues, as well as missing features.
 
-MySQL 5.6 is used for the development. It will run fine for MySQL 5.5 or above.
+MySQL 5.6 is used for the development. It will run fine on MySQL 5.5 or above.
 
 ************
 Installation

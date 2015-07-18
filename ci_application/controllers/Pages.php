@@ -7,8 +7,10 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 
-		if( $this->session->userdata('logged_in') ) {
+		if( $this->session->userdata('logged_in')['type'] != '10001' ) {
 			redirect( '/user', 'refresh' );
+		} else if( $this->session->userdata('logged_in') ) {
+			redirect( '/librarian', 'refresh' );
 		} else {
 			$data['title'] = ucfirst($page);
 			$data['args'] = $args;

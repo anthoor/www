@@ -2,7 +2,7 @@
 
 class User_model extends CI_Model {
 	public function login( $username, $password ) {
-		$this->db->select( 'id, name, password' );
+		$this->db->select( 'id, type_id, name, password' );
 		$this->db->from( 'user' );
 		$this->db->where( 'name', $username );
 		$this->db->where( 'password', md5($password) );
@@ -24,5 +24,13 @@ class User_model extends CI_Model {
 		foreach( $result as $row ) {
 			return $row->full_name;
 		}
+	}
+
+	public function users() {
+		$this->db->select( 'id, name, full_name' );
+		$this->db->from( 'user' );
+		$this->db->where( 'valid', 1 );
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 }

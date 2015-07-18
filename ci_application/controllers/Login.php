@@ -9,19 +9,25 @@ class Login extends CI_Controller {
 	}
 
 	public function index( ) {
-		$data['title'] = "Login";
-		$active = array();
-		$active['home'] = "";
-		$active['login'] = "active";
-		$active['view'] = "";
-		$data['active'] = $active;
-		$data['head'] = '<div class="form-group has-error resize">';
-		$data['tail'] = '</div>';
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+			redirect( '/librarian', 'refresh' );
+		} else if( $this->session->userdata('logged_in') ) {
+			redirect( '/user', 'refresh' );
+		} else {
+			$data['title'] = "Login";
+			$active = array();
+			$active['home'] = "";
+			$active['login'] = "active";
+			$active['view'] = "";
+			$data['active'] = $active;
+			$data['head'] = '<div class="form-group has-error resize">';
+			$data['tail'] = '</div>';
 
-		$this->load->helper( array('form') );
-		$this->load->view('templates/header', $data);
-		$this->load->view("pages/login", $data);
-		$this->load->view('templates/footer', $data);
+			$this->load->helper( array('form') );
+			$this->load->view('templates/header', $data);
+			$this->load->view("pages/login", $data);
+			$this->load->view('templates/footer', $data);
+		}
 	}
 
 	public function view( ) {
@@ -62,7 +68,11 @@ class Login extends CI_Controller {
 			$this->load->view("pages/login", $data);
 			$this->load->view('templates/footer', $data);
 		} else {
-			redirect( '/user', 'refresh' );		}
+			if( $this->session->userdata('logged_in')['type'] != '10001' )
+				redirect( '/user', 'refresh' );
+			else
+				redirect( '/librarian', 'refresh' );
+		}
 	}
 
 	public function check_database($password) {
@@ -72,7 +82,7 @@ class Login extends CI_Controller {
 		if($result) {
 			$sess_array = array();
 			foreach($result as $row) {
-				$sess_array = array( 'id'=>$row->id );
+				$sess_array = array( 'id'=>$row->id, 'type'=>$row->type_id );
 				$this->session->set_userdata('logged_in', $sess_array);
 			}
 			return TRUE;

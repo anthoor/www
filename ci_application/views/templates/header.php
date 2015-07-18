@@ -2,7 +2,6 @@
 	<head>
 		<title><?php echo $title; ?></title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/spacelab.min.css"; ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.css"; ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.bootstrap.css"; ?>" />
 		<script src="<?php echo base_url()."js/jquery.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/bootstrap.min.js"; ?>"></script>

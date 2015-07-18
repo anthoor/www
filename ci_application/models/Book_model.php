@@ -33,12 +33,12 @@ class Book_model extends CI_Model {
 	}
 
 	public function authors() {
-		$query = $this->db->query( "SELECT first_name, middle_name, last_name, COUNT(book_id) AS count FROM author LEFT OUTER JOIN written ON author.id = written.author_id GROUP BY first_name" );
+		$query = $this->db->query( "SELECT author.id, first_name, middle_name, last_name, COUNT(book_id) AS count FROM author LEFT OUTER JOIN written ON author.id = written.author_id GROUP BY first_name" );
 		return $query->result_array();
 	}
 
 	public function publishers() {
-		$query = $this->db->query( "SELECT name, COUNT(book.id) AS count FROM publisher LEFT OUTER JOIN book ON publisher.id = book.publisher GROUP BY name" );
+		$query = $this->db->query( "SELECT publisher.id, name, COUNT(book.id) AS count FROM publisher LEFT OUTER JOIN book ON publisher.id = book.publisher GROUP BY name" );
 		return $query->result_array();
 	}
 

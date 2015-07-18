@@ -9,7 +9,7 @@ class Librarian extends CI_Controller {
 	}
 
 	public function index() {
-		if( $this->session->userdata('logged_in') ) {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 
@@ -18,33 +18,38 @@ class Librarian extends CI_Controller {
 			$active['home'] = "active";
 			$active['books'] = "";
 			$active['stats'] = "";
+			$active['view'] = "";
+			$active['user'] = "";
 			$data['active'] = $active;
 
-			$this->load->view('templates/uheader', $data);
+			$this->load->view('templates/lheader', $data);
 			$this->load->view("librarian/index", $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/lfooter', $data);
+		} else if( $this->session->userdata('logged_in') ) {
+			redirect( '/user', 'refresh' );
 		} else {
 			redirect( '/login', 'refresh' );
 		}
 	}
 
 	public function view( $page="viewbooks", $args=array(0=>"all") ) {
-		$data['test'] = "TEST";
 		if( !file_exists(APPPATH."/views/librarian/$page.php") ) {
 			show_404();
 		}
-		if( $this->session->userdata('logged_in') ) {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 
+			$active['home'] = "";
+			$active['books'] = "";
+			$active['stats'] = "";
+			$active['view'] = "";
+			$active['user'] = "";
 			switch( $page ) {
 //VIEW SECTION
 				case "viewbooks":	
-					$active['home'] = "";
-					$active['books'] = "";
-					$active['stats'] = "";
 					$active['view'] = "active";
-					$data['active'] = $active;
+					
 					switch( $args ) {
 						case "available":
 							$data['title'] = "View Available Books";
@@ -61,26 +66,17 @@ class Librarian extends CI_Controller {
 					break;
 				case "viewauthors":
 					$data['title'] = "View Authors";
-					$active['home'] = "";
-					$active['books'] = "";
-					$active['stats'] = "";
 					$active['view'] = "active";
 					$data['active'] = $active;
 					$data['bauthors'] = $this->book_model->authors();
 					break;
 				case "viewpublishers":
 					$data['title'] = "View Publishers";
-					$active['home'] = "";
-					$active['books'] = "";
-					$active['stats'] = "";
 					$active['view'] = "active";
 					$data['active'] = $active;
 					$data['publishers'] = $this->book_model->publishers();
 					break;
 				case "viewissues":	
-					$active['home'] = "";
-					$active['books'] = "";
-					$active['stats'] = "";
 					$active['view'] = "active";
 					$data['active'] = $active;
 					switch( $args ) {
@@ -92,91 +88,67 @@ class Librarian extends CI_Controller {
 						default:
 							$data['title'] = "View All Issues";
 							$data['issues'] = $this->book_model->issues();
-							$data['toggle'] = "History";
+							$data['toggle'] = "All";
 					}
 					break;
 
 //OPERATION SECTION
 				case "addbook":
-					$data['title'] = "Add Book";
-					$active['home'] = "";
-					$active['books'] = "active";
-					$active['stats'] = "";
-					$active['view'] = "";
-					$data['active'] = $active;
-					break;
-				case "addcopies":
 					$data['title'] = "Add Book Copies";
-					$active['home'] = "";
 					$active['books'] = "active";
-					$active['stats'] = "";
-					$active['view'] = "";
 					$data['active'] = $active;
+					$data['publishers'] = $this->book_model->publishers();
+					$data['bauthors'] = $this->book_model->authors();
+					break;
+				case "addcopy":
+					$data['title'] = "Add Book Copies";
+					$active['books'] = "active";
+					$data['active'] = $active;
+					$data['books'] = $this->book_model->get_all_books();
+					$data['authors'] = $this->book_model->get_authors();
 					break;
 				case "addauthor":
 					$data['title'] = "Add Author";
-					$active['home'] = "";
 					$active['books'] = "active";
-					$active['stats'] = "";
-					$active['view'] = "";
 					$data['active'] = $active;
 					break;
 				case "addpublisher":
 					$data['title'] = "Add Publisher";
-					$active['home'] = "";
 					$active['books'] = "active";
-					$active['stats'] = "";
-					$active['view'] = "";
 					$data['active'] = $active;
 					break;
 				case "damagecopy":
 					$data['title'] = "Report Damaged Copy";
-					$active['home'] = "";
 					$active['books'] = "active";
-					$active['stats'] = "";
-					$active['view'] = "";
 					$data['active'] = $active;
 					break;
 				case "removecopy":
 					$data['title'] = "Remove Copies";
-					$active['home'] = "";
 					$active['books'] = "active";
-					$active['stats'] = "";
-					$active['view'] = "";
 					$data['active'] = $active;
 					break;
 				case "issue":
 					$data['title'] = "Issue Book";
-					$active['home'] = "";
-					$active['books'] = "";
 					$active['stats'] = "active";
-					$active['view'] = "";
 					$data['active'] = $active;
-					$data['books'] = $this->book_model->get_books();
+					$data['users'] = $this->user_model->users();
 					break;
 				case "renew":
 					$data['title'] = "Renew Book";
-					$active['home'] = "";
-					$active['books'] = "";
 					$active['stats'] = "active";
-					$active['view'] = "";
 					$data['active'] = $active;
 					$data['books'] = $this->book_model->get_books();
 					break;
 				case "return":
 					$data['title'] = "Return Book";
-					$active['home'] = "";
-					$active['books'] = "";
 					$active['stats'] = "active";
-					$active['view'] = "";
-					$data['active'] = $active;
 					$data['books'] = $this->book_model->get_books();
 					break;
 			}
-
-			$this->load->view('templates/uheader', $data);
+			$data['active'] = $active;
+			$this->load->view('templates/lheader', $data);
 			$this->load->view("librarian/$page", $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/lfooter', $data);
 		} else {
 			redirect( '/login', 'refresh' );
 		}

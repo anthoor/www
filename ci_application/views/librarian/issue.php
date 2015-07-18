@@ -3,23 +3,23 @@
 	<div class="col-md-8">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title">Add Book</h3>
+				<h3 class="panel-title">Issue Book</h3>
 			</div>
 		</div>
 		<div class="">
 			<?php echo form_open('/librarian/addbookaction'); ?>
 				<div class="form-group">
-					<label for="title">Title</label>
-					<input type="text" name="title" id="title" class="form-control"
-						value="<?php echo set_value('title'); ?>" required autofocus
-						placeholder="Book Title" />
+					<label for="copyid">Copy ID</label>
+					<input type="number" name="copyid" id="copyid" class="form-control"
+						value="<?= set_value('copyid') ?>" required
+						placeholder="Copy ID Printed on the Book" />
 				</div>
 				<div class="form-group">
-					<label for="authors">Authors</label>
-					<select name="authors[]" id="authors" class="form-control" multiple required>
-						<?php foreach( $bauthors as $author ) : ?>
-							<option value="<?= $author['id'] ?>">
-								<?= $author['first_name']." ".$author['middle_name']." ".$author['last_name'] ?>
+					<label for="user">User</label>
+					<select name="user" id="user" class="form-control">
+						<?php foreach( $users as $user ) : ?>
+							<option value="<?= $user['id'] ?>">
+								<?= $user['full_name']." (".$user['name'].")" ?>
 							</option>
 						<?php endforeach ?>
 					</select>
