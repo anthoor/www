@@ -24,31 +24,11 @@
 						<?php endforeach ?>
 					</select>
 				</div>
-				<div class="form-group">
-					<label for="edition">Edition</label>
-					<input type="number" name="edition" id="edition" class="form-control"
-						value="<?php echo set_value('edition'); ?>" required
-						min="1" placeholder="Book Edition" />
-				</div>
-				<div class="form-group">
-					<label for="year">Year</label>
-					<input type="number" name="year" id="year" class="form-control"
-						value="<?php echo set_value('year'); ?>" required
-						min="1000" placeholder="Year of Publication" />
-				</div>
-				<div class="form-group">
-					<label for="publisher">Publisher</label>
-					<select name="publisher" id="publisher" class="form-control">
-						<?php foreach( $publishers as $publisher ) : ?>
-							<option value="<?= $publisher['id'] ?>"><?= $publisher['name'] ?></option>
-						<?php endforeach ?>
-					</select>
-				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
 					<?php echo validation_errors(); ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-success" style="width: 30%;">Add Book</button>
+					<button class="btn btn-success" style="width: 30%;">Issue Book</button>
 					<button class="btn btn-danger" style="width: 30%;">Clear</button>
 				</div>
 			</form>

@@ -10,13 +10,9 @@ Release Information
 
 This repo contains in-development code for future releases. To download stable software, choose from the release list or wait till I finish a release.
 
-**************************
-Changelog and New Features
-**************************
-
-=========
+*********
 Changelog
-=========
+*********
 
 * Added DataTables for displaying tables
 * Separated User and Librarian views
@@ -24,36 +20,6 @@ Changelog
 * Completed Librarian->View menu
 * UI completed for Librarian->Books menu
 
-================
-Current Features
-================
-
------
-Guest
------
-* View List of Available Books
-
-----
-User
-----
-* Login
-* View Lists
-
-   * Books
-   * Authors
-   * Publishers
-   * Issues
-
----------
-Librarian
----------
-* Login
-* View Lists
-
-   * Books
-   * Authors
-   * Publishers
-   * Issues
 
 *******************
 Server Requirements
