@@ -33,6 +33,17 @@ Guest
 -----
 * View List of Available Books
 
+----
+User
+----
+* Login
+* View Lists
+
+   * Books
+   * Authors
+   * Publishers
+   * Issues
+
 ---------
 Librarian
 ---------
