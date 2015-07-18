@@ -1,6 +1,6 @@
 <div class="jumbotron">
-	<div style="float:left"><img src="<?php echo base_url()."css/logo.png"; ?>" alt="csdl" height="150px" /></div>
-	<h1>CSE Department Library <small>csdl.mitkannur.ac.in</small></h1>
+	<div style="float:left"><img src="<?php echo base_url()."css/logo.png"; ?>" alt="csdl" height="100px" /></div>
+	<h2>Login<br><small> CSE Department Library</small></h2>
 </div>
 <div class="row">
 	<div class="col-md-4"></div>

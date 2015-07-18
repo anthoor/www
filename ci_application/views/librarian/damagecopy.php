@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div class="">
-			<?php echo form_open('/librarian/damagecopyaction'); ?>
+			<?= form_open('/librarian/damagecopyaction') ?>
 				<div class="form-group">
 					<label for="copyid">Copy ID</label>
 					<input type="number" name="copyid" id="copyid" class="form-control"
@@ -16,11 +16,10 @@
 						placeholder="Copy ID Printed on the Book" />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
-					<?php echo validation_errors(); ?>
+					<?= validation_errors() ?>
 				</div>
 				<div align="center">
 					<button class="btn btn-danger" style="width: 30%;">Mark Damaged</button>
-					<button class="btn btn-default" style="width: 30%;">Clear</button>
 				</div>
 			</form>
 		</div>

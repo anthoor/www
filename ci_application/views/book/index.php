@@ -1,6 +1,6 @@
 <div class="jumbotron">
-	<div style="float:left"><img src="<?php echo base_url()."css/logo.png"; ?>" alt="csdl" height="150px" /></div>
-	<h1>List of Books<small> (Available)</small><br><small>CSE Department Library</small></h1>
+	<div style="float:left"><img src="<?php echo base_url()."css/logo.png"; ?>" alt="csdl" height="100px" /></div>
+	<h2>List of Books<small> (Available)</small><br><small>CSE Department Library</small></h2>
 </div>
 <div class="">
 	<table class="table table-bordered table-striped" id="tableid">

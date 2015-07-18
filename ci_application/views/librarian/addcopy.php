@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div class="">
-			<?php echo form_open('/librarian/addcopyaction'); ?>
+			<?= form_open('/librarian/addcopyaction') ?>
 				<div class="form-group">
 					<label for="title">Title</label>
 					<select name="title" id="title" class="form-control">
@@ -27,11 +27,10 @@
 						min="1" placeholder="Number of New Copies" />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
-					<?php echo validation_errors(); ?>
+					<?= validation_errors() ?>
 				</div>
 				<div align="center">
 					<button class="btn btn-success" style="width: 30%;">Add Copies</button>
-					<button class="btn btn-danger" style="width: 30%;">Clear</button>
 				</div>
 			</form>
 		</div>

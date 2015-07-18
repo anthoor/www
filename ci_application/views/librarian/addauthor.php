@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div class="">
-			<?php echo form_open('/librarian/addauthoraction'); ?>
+			<?= form_open('/librarian/addauthoraction') ?>
 				<div class="form-group">
 					<label for="fname">First Name</label>
 					<input type="text" name="fname" id="fname" class="form-control"
@@ -27,11 +27,10 @@
 						placeholder="Last Name" />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
-					<?php echo validation_errors(); ?>
+					<?= validation_errors() ?>
 				</div>
 				<div align="center">
 					<button class="btn btn-success" style="width: 30%;">Add Author</button>
-					<button class="btn btn-danger" style="width: 30%;">Clear</button>
 				</div>
 			</form>
 		</div>

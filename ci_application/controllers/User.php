@@ -15,10 +15,7 @@ class User extends CI_Controller {
 			$data['title'] = "User Home";
 			$active = array();
 			$active['home'] = "active";
-			$active['books'] = "";
-			$active['stats'] = "";
-			$active['view'] = "";
-			$active['user'] = "";
+			$active['view'] = "active";
 			$data['active'] = $active;
 
 			$this->load->view('templates/uheader', $data);
@@ -39,13 +36,9 @@ class User extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 
-			$active['home'] = "";
-			$active['view'] = "";
 			switch( $page ) {
 //VIEW SECTION
 				case "viewbooks":	
-					$active['view'] = "active";
-					
 					switch( $args ) {
 						case "available":
 							$data['title'] = "View Available Books";
@@ -62,19 +55,13 @@ class User extends CI_Controller {
 					break;
 				case "viewauthors":
 					$data['title'] = "View Authors";
-					$active['view'] = "active";
-					$data['active'] = $active;
 					$data['bauthors'] = $this->book_model->authors();
 					break;
 				case "viewpublishers":
 					$data['title'] = "View Publishers";
-					$active['view'] = "active";
-					$data['active'] = $active;
 					$data['publishers'] = $this->book_model->publishers();
 					break;
 				case "viewissues":	
-					$active['view'] = "active";
-					$data['active'] = $active;
 					switch( $args ) {
 						case "pending":
 							$data['title'] = "View Pending Issues";
@@ -88,6 +75,9 @@ class User extends CI_Controller {
 					}
 					break;
 			}
+			$active = array();
+			$active['home'] = "active";
+			$active['view'] = "active";
 			$data['active'] = $active;
 			$this->load->view('templates/uheader', $data);
 			$this->load->view("user/$page", $data);

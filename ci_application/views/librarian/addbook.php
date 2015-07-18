@@ -1,4 +1,4 @@
-<div class="row" style="margin-top:-9px;">
+<div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="panel panel-info">
@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div class="">
-			<?php echo form_open('/librarian/addbookaction'); ?>
+			<?= form_open('/librarian/addbookaction') ?>
 				<div class="form-group">
 					<label for="title">Title</label>
 					<input type="text" name="title" id="title" class="form-control"
@@ -45,14 +45,14 @@
 					</select>
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
-					<?php echo validation_errors(); ?>
+					<?= validation_errors() ?>
 				</div>
 				<div align="center">
 					<button class="btn btn-success" style="width: 30%;">Add Book</button>
-					<button class="btn btn-danger" style="width: 30%;">Clear</button>
 				</div>
 			</form>
 		</div>
 	</div>
 	<div class="col-md-2"></div>
 </div>
+<div style="height:50px;"> &nbsp; </div>

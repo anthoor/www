@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div class="">
-			<?php echo form_open('/librarian/addpublisheraction'); ?>
+			<?= form_open('/librarian/addpublisheraction') ?>
 				<div class="form-group">
 					<label for="pname">Publisher Name</label>
 					<input type="text" name="pname" id="pname" class="form-control"
@@ -16,11 +16,10 @@
 						placeholder="Publisher Name" />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
-					<?php echo validation_errors(); ?>
+					<?= validation_errors() ?>
 				</div>
 				<div align="center">
 					<button class="btn btn-success" style="width: 30%;">Add Publisher</button>
-					<button class="btn btn-danger" style="width: 30%;">Clear</button>
 				</div>
 			</form>
 		</div>

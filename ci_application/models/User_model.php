@@ -33,4 +33,25 @@ class User_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function suspended_users() {
+		$this->db->select( 'id, name, full_name' );
+		$this->db->from( 'user' );
+		$this->db->where( 'valid', 2 );
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function deletable_users() {
+		$query = $this->db->query("SELECT id, name, full_name FROM user WHERE valid<>0");
+		return $query->result_array();
+	}
+
+	public function types() {
+		$this->db->select( 'id, name' );
+		$this->db->from( 'user_type' );
+		$this->db->order_by( 'id' );
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

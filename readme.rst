@@ -14,11 +14,19 @@ This repo contains in-development code for future releases. To download stable s
 Changelog
 *********
 
-* Added DataTables for displaying tables
-* Separated User and Librarian views
-* Completed User->View menu
-* Completed Librarian->View menu
-* UI completed for Librarian->Books menu
+* Commit: 19-07-2015 11.40PM
+
+  * Finished UI design for Librarian
+  * Finished UI design for User
+  * Changes in Look and Feel
+
+* Commit: 18-07-2015 3.30PM
+
+  * Added DataTables for displaying tables
+  * Separated User and Librarian views
+  * Completed User->View menu
+  * Completed Librarian->View menu
+  * UI completed for Librarian->Books menu
 
 
 *******************

@@ -25,7 +25,7 @@
 		<?php endforeach ?>
 		</tbody>
 	</table>
-	<div>&nbsp;</div>
+	<div style="height:50px;"> &nbsp; </div>
 </div>
 <script>
 $(document).ready(function(){

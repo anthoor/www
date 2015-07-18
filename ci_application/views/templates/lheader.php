@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title><?php echo $title; ?></title>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/spacelab.min.css"; ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/readable.min.css"; ?>" /><!--journal/readable-->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.bootstrap.css"; ?>" />
 		<script src="<?php echo base_url()."js/jquery.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/bootstrap.min.js"; ?>"></script>
@@ -99,7 +99,7 @@
 				</ul>
 				<span class="navbar-right">
 					<ul class="nav navbar-nav">
-						<li class="dropdown navbar-right">
+						<li class="dropdown navbar-right active">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span class="glyphicon glyphicon-cog"></span>
 								<span style="font-weight:bold;"><?php echo $realname; ?></span>
