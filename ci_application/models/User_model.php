@@ -26,7 +26,7 @@ class User_model extends CI_Model {
 		}
 	}
 
-	public function users() {
+	public function get() {
 		$this->db->select( 'id, name, full_name' );
 		$this->db->from( 'user' );
 		$this->db->where( 'valid', 1 );
@@ -34,7 +34,7 @@ class User_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function suspended_users() {
+	public function get_suspended() {
 		$this->db->select( 'id, name, full_name' );
 		$this->db->from( 'user' );
 		$this->db->where( 'valid', 2 );
@@ -42,16 +42,30 @@ class User_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function deletable_users() {
+	public function get_deletable() {
 		$query = $this->db->query("SELECT id, name, full_name FROM user WHERE valid<>0");
 		return $query->result_array();
 	}
 
-	public function types() {
+	public function get_types() {
 		$this->db->select( 'id, name' );
 		$this->db->from( 'user_type' );
 		$this->db->order_by( 'id' );
 		$query = $this->db->get();
 		return $query->result_array();
+	}
+
+	public function pending_issues( $userid ) {
+		$string = "SELECT * FROM issue WHERE user_id = $userid AND id NOT IN (SELECT issue_id FROM `return`)";
+		$query = $this->db->query( $string );
+		return $query->num_rows();
+	}
+
+	public function issue_limit( $userid ) {
+		$string = "SELECT book_limit FROM user, user_type WHERE user.type_id = user_type.id";
+		$query = $this->db->query( $string );
+		$rows = $query->result_array();
+		error_log($row[0]);
+		return $rows[0];
 	}
 }

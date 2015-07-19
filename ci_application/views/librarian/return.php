@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div class="">
-			<?= form_open('/librarian/renewbookaction') ?>
+			<?= form_open('/librarian/returnbookaction') ?>
 				<div class="form-group">
 					<label for="issue">Issues</label>
 					<select name="issue[]" id="issue" class="form-control" style="height:200px;" multiple required>

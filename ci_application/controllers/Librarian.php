@@ -3,9 +3,17 @@
 class Librarian extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('user_model');
-		$this->load->model('book_model');
 		$this->load->helper( 'form' );
+
+		$this->load->library('form_validation');
+
+		$this->load->model('author_model');
+		$this->load->model('book_model');
+		$this->load->model('copy_model');
+		$this->load->model('issue_model');
+		$this->load->model('publisher_model');
+		$this->load->model('return_model');
+		$this->load->model('user_model');
 	}
 
 	public function index() {
@@ -35,61 +43,55 @@ class Librarian extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 
-			$active['home'] = "active";
-			$active['books'] = "active";
-			$active['stats'] = "active";
-			$active['view'] = "active";
-			$active['user'] = "active";
+			$active = array('home'=>'active', 'books'=>'active', 'stats'=>'active', 'view'=>'active', 'user'=>'active' );
 			$data['active'] = $active;
 			switch( $page ) {
-//VIEW SECTION
-				case "viewbooks":	
+				case "viewbooks":
+					
 					switch( $args ) {
 						case "available":
 							$data['title'] = "View Available Books";
-							$data['authors'] = $this->book_model->get_authors();
+							$data['authors'] = $this->author_model->get_written();
 							$data['books'] = $this->book_model->get_books();
 							$data['toggle'] = "Available";
 							break;
 						default:
 							$data['title'] = "View All Books";
-							$data['authors'] = $this->book_model->get_authors();
+							$data['authors'] = $this->author_model->get_written();
 							$data['books'] = $this->book_model->get_all_books();
 							$data['toggle'] = "All";
 					}
 					break;
 				case "viewauthors":
 					$data['title'] = "View Authors";
-					$data['bauthors'] = $this->book_model->authors();
+					$data['bauthors'] = $this->author_model->get();
 					break;
 				case "viewpublishers":
 					$data['title'] = "View Publishers";
-					$data['publishers'] = $this->book_model->publishers();
+					$data['publishers'] = $this->publisher_model->get();
 					break;
 				case "viewissues":	
 					switch( $args ) {
 						case "pending":
 							$data['title'] = "View Pending Issues";
-							$data['issues'] = $this->book_model->pending_issues();
+							$data['issues'] = $this->issue_model->get_pending();
 							$data['toggle'] = "Pending";
 							break;
 						default:
 							$data['title'] = "View All Issues";
-							$data['issues'] = $this->book_model->issues();
+							$data['issues'] = $this->issue_model->get();
 							$data['toggle'] = "All";
 					}
 					break;
-
-//OPERATION SECTION
 				case "addbook":
 					$data['title'] = "Add Book";
-					$data['publishers'] = $this->book_model->publishers();
-					$data['bauthors'] = $this->book_model->authors();
+					$data['publishers'] = $this->publisher_model->get();
+					$data['bauthors'] = $this->author_model->get();
 					break;
 				case "addcopy":
 					$data['title'] = "Add Book Copies";
 					$data['books'] = $this->book_model->books();
-					$data['authors'] = $this->book_model->get_authors();
+					$data['authors'] = $this->author_model->get_written();
 					break;
 				case "addauthor":
 					$data['title'] = "Add Author";
@@ -105,31 +107,31 @@ class Librarian extends CI_Controller {
 					break;
 				case "issue":
 					$data['title'] = "Issue Book";
-					$data['users'] = $this->user_model->users();
+					$data['users'] = $this->user_model->get();
 					break;
 				case "renew":
 					$data['title'] = "Renew Book";
-					$data['issues'] = $this->book_model->pending_issues();
+					$data['issues'] = $this->issue_model->get_pending();
 					break;
 				case "return":
 					$data['title'] = "Return Book";
-					$data['issues'] = $this->book_model->pending_issues();
+					$data['issues'] = $this->issue_model->get_pending();
 					break;
 				case "adduser":
 					$data['title'] = "Add User";
-					$data['types'] = $this->user_model->types();
+					$data['types'] = $this->user_model->get_types();
 					break;
 				case "suspenduser":
 					$data['title'] = "Suspend User";
-					$data['users'] = $this->user_model->users();
+					$data['users'] = $this->user_model->get();
 					break;
 				case "revokesuspension":
 					$data['title'] = "Revoke Suspension";
-					$data['users'] = $this->user_model->suspended_users();
+					$data['users'] = $this->user_model->get_suspended();
 					break;
 				case "removeuser":
 					$data['title'] = "Remove User";
-					$data['users'] = $this->user_model->deletable_users();
+					$data['users'] = $this->user_model->get_deletable();
 					break;
 			}
 			$data['active'] = $active;
@@ -144,8 +146,6 @@ class Librarian extends CI_Controller {
 	public function addauthoraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->load->library('form_validation');
-
 			$this->form_validation->set_rules('fname', 'First Name', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('mname', 'Middle Name', 'trim|xss_clean');
 			$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|xss_clean');
@@ -156,8 +156,7 @@ class Librarian extends CI_Controller {
 				$fname = $this->input->post('fname');
 				$mname = $this->input->post('mname');
 				$lname = $this->input->post('lname');
-				$inputs = array( 'first_name'=>$fname, 'middle_name'=>$mname, 'last_name'=>$lname );
-				$this->db->insert('author', $inputs);
+				$this->author_model->add( $fname, $mname, $lname );
 				$this->session->set_userdata('message', "Author: <strong>$fname $mname $lname</strong> Successfully Added!");
 				redirect( '/librarian/view/addauthor', 'refresh' );
 			}
@@ -166,16 +165,14 @@ class Librarian extends CI_Controller {
 
 	public function addpublisheraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
-
-			$this->load->library('form_validation');
-
+			
 			$this->form_validation->set_rules('pname', 'Publisher Name', 'trim|required|xss_clean');
 			
 			if($this->form_validation->run() == FALSE) {
 				$this->view("addpublisher");
 			} else {
 				$pub = $this->input->post('pname');
-				$this->db->insert( 'publisher', array('name'=> $pub) );
+				$this->publisher_model->add( $pub );
 				$this->session->set_userdata('message', "Publisher: <strong>$pub</strong> Successfully Added!");
 				redirect( '/librarian/view/addpublisher', 'refresh' );
 			}
@@ -184,8 +181,6 @@ class Librarian extends CI_Controller {
 
 	public function addbookaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
-
-			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('authors[]', 'Authors', 'trim|required|xss_clean');
@@ -201,21 +196,18 @@ class Librarian extends CI_Controller {
 				$edition = $this->input->post('edition');
 				$year = $this->input->post('year');
 				$publisher = $this->input->post('publisher');
-				$inputs = array( 'title'=>$title, 'publisher'=>$publisher, 'edition'=>$edition, 'year'=>$year );
-				$this->db->insert('book', $inputs);
-				$book_id = $this->db->insert_id();
+				$book = $this->book_model->add( $title, $publisher, $edition, $year );
 				foreach( $authors as $author ) {
-					$this->db->insert( 'written', array('book_id'=>$book_id, 'author_id'=>$author) );
+					$this->author_model->add_written( $book, $author );
 				}
 				$this->session->set_userdata('message', "Book: <strong>$title</strong> Successfully Added!");
 				redirect( '/librarian/view/addbook', 'refresh' );
 			}
 		}
 	}
+
 	public function addcopyaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
-
-			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('copies', 'Copies', 'trim|required|xss_clean');
@@ -225,9 +217,8 @@ class Librarian extends CI_Controller {
 			} else {
 				$title = $this->input->post('title');
 				$copies = $this->input->post('copies');
-				$inputs = array( 'book_id'=>$title, 'status'=>'A' );
 				for( $i=0; $i<$copies; $i++ ) {
-					$this->db->insert('copy', $inputs);
+					$this->copy_model->add( $title );
 				}
 				$this->session->set_userdata('message', "<strong>$copies copies</strong> Successfully Added!");
 				redirect( '/librarian/view/addcopy', 'refresh' );
@@ -238,41 +229,21 @@ class Librarian extends CI_Controller {
 	public function damagecopyaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->load->library('form_validation');
-
 			$this->form_validation->set_rules('copyid', 'Copy ID', 'trim|required|xss_clean|callback_valid_copy');
 			
 			if($this->form_validation->run() == FALSE) {
 				$this->view("damagecopy");
 			} else {
 				$copies = $this->input->post('copyid');
-				$this->db->where('id',$copies);
-				$inputs = array( 'status'=>'D' );
-				$this->db->update('copy', $inputs);
+				$this->copy_model->damage( $copies );
 				$this->session->set_userdata('message', "Copy ID: <strong>$copies</strong> Marked as Damaged!");
 				redirect( '/librarian/view/damagecopy', 'refresh' );
 			}
 		}
 	}
 
-	public function valid_copy( $copy ) {
-		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
-			$this->db->where('id',$copy);
-			$this->db->from('copy');
-			$this->db->select('book_id');
-			$query = $this->db->get();
-			if( $query->num_rows() == 1 ) {
-				return TRUE;
-			}
-		}
-		$this->form_validation->set_message( 'valid_copy', 'The Copy Doesn\'t Exist' );
-		return FALSE;
-	}
-
 	public function removecopyaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
-
-			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('copyid', 'Copy ID', 'trim|required|xss_clean|callback_valid_copy');
 			
@@ -280,12 +251,83 @@ class Librarian extends CI_Controller {
 				$this->view("removecopy");
 			} else {
 				$copies = $this->input->post('copyid');
-				$this->db->where('id',$copies);
-				$inputs = array( 'status'=>'R' );
-				$this->db->update('copy', $inputs);
+				$this->copy_model->remove( $copies );
 				$this->session->set_userdata('message', "Copy ID: <strong>$copies</strong> Removed!");
 				redirect( '/librarian/view/removecopy', 'refresh' );
 			}
 		}
+	}
+
+	public function issuebookaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|callback_user_issueable');
+			$this->form_validation->set_rules('copyid', 'Copy ID', 'trim|required|xss_clean|callback_valid_copy');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("issue");
+			} else {
+				$user = $this->input->post('user');
+				$copies = $this->input->post('copyid');
+				$this->issue_model->add( $user, $copies );
+				$this->copy_model->lease( $copies );
+				$this->session->set_userdata('message', "Copy ID: <strong>$copies</strong> Successfully Issued!");
+				redirect( '/librarian/view/issue', 'refresh' );
+			}
+		}
+	}
+
+	public function renewbookaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('issue[]', 'Issues', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("renew");
+			} else {
+				$issues = $this->input->post('issue[]');
+				foreach( $issues as $issue ) {
+					$this->issue_model->renew( $issue );
+				}
+				$this->session->set_userdata('message', "All Selected Issues Successfully Renewed!");
+				redirect( '/librarian/view/renew', 'redirect' );
+			}
+		}
+	}
+
+	public function returnbookaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('issue[]', 'Issues', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("return");
+			} else {
+				$issues = $this->input->post('issue[]');
+				foreach( $issues as $issue ) {
+					$this->return_model->add( $issue );
+					error_log($this->issue_model->get_copy($issue));
+					$this->copy_model->return_copy( $this->issue_model->get_copy($issue) );
+				}
+				$this->session->set_userdata('message', "All Selected Issues Successfully Returned!");
+				redirect( '/librarian/view/return', 'redirect' );
+			}
+		}
+	}
+
+	public function user_issueable( $userid ) {
+		if( $this->user_model->pending_issues($userid)<$this->user_model->issue_limit($userid) ) {
+			return TRUE;
+		}
+		$this->form_validation->set_message( 'user_issueable', 'The user already has maximum allowed books in hand' );
+		return FALSE;
+	}
+
+	public function valid_copy( $copy ) {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+			if( $this->copy_model->valid( $copy ) ) {
+				return TRUE;
+			}
+		}
+		$this->form_validation->set_message( 'valid_copy', 'The Copy Doesn\'t Exist' );
+		return FALSE;
 	}
 }
