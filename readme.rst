@@ -13,6 +13,12 @@ This repo contains in-development code for future releases. To download stable s
 *********
 Changelog
 *********
+
+* Commit: 19-07-2015 11.05PM
+
+  * Finished Issue menu for Librarian
+  * Created separate models for DBs
+
 * Commit: 19-07-2015 11.30AM
 
   * Finished Book menu for Librarian
