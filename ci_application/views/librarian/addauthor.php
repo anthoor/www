@@ -12,7 +12,7 @@
 				<div class="form-group">
 					<label for="fname">First Name</label>
 					<input type="text" name="fname" id="fname" class="form-control"
-						value="<?= set_value('fname') ?>" required
+						value="<?= set_value('fname') ?>" required autofocus
 						placeholder="First Name" />
 				</div>
 				<div class="form-group">

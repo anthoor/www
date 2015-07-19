@@ -88,7 +88,7 @@ class Librarian extends CI_Controller {
 					break;
 				case "addcopy":
 					$data['title'] = "Add Book Copies";
-					$data['books'] = $this->book_model->get_all_books();
+					$data['books'] = $this->book_model->books();
 					$data['authors'] = $this->book_model->get_authors();
 					break;
 				case "addauthor":
@@ -138,6 +138,154 @@ class Librarian extends CI_Controller {
 			$this->load->view('templates/lfooter', $data);
 		} else {
 			redirect( '/login', 'refresh' );
+		}
+	}
+
+	public function addauthoraction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('fname', 'First Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('mname', 'Middle Name', 'trim|xss_clean');
+			$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|xss_clean');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("addauthor");
+			} else {
+				$fname = $this->input->post('fname');
+				$mname = $this->input->post('mname');
+				$lname = $this->input->post('lname');
+				$inputs = array( 'first_name'=>$fname, 'middle_name'=>$mname, 'last_name'=>$lname );
+				$this->db->insert('author', $inputs);
+				$this->session->set_userdata('message', "Author: <strong>$fname $mname $lname</strong> Successfully Added!");
+				redirect( '/librarian/view/addauthor', 'refresh' );
+			}
+		}
+	}
+
+	public function addpublisheraction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('pname', 'Publisher Name', 'trim|required|xss_clean');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("addpublisher");
+			} else {
+				$pub = $this->input->post('pname');
+				$this->db->insert( 'publisher', array('name'=> $pub) );
+				$this->session->set_userdata('message', "Publisher: <strong>$pub</strong> Successfully Added!");
+				redirect( '/librarian/view/addpublisher', 'refresh' );
+			}
+		}
+	}
+
+	public function addbookaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('authors[]', 'Authors', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('edition', 'Edition', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('year', 'Year of Publication', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('publisher', 'Publisher', 'trim|required|xss_clean');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("addbook");
+			} else {
+				$title = $this->input->post('title');
+				$authors = $this->input->post('authors[]');
+				$edition = $this->input->post('edition');
+				$year = $this->input->post('year');
+				$publisher = $this->input->post('publisher');
+				$inputs = array( 'title'=>$title, 'publisher'=>$publisher, 'edition'=>$edition, 'year'=>$year );
+				$this->db->insert('book', $inputs);
+				$book_id = $this->db->insert_id();
+				foreach( $authors as $author ) {
+					$this->db->insert( 'written', array('book_id'=>$book_id, 'author_id'=>$author) );
+				}
+				$this->session->set_userdata('message', "Book: <strong>$title</strong> Successfully Added!");
+				redirect( '/librarian/view/addbook', 'refresh' );
+			}
+		}
+	}
+	public function addcopyaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('copies', 'Copies', 'trim|required|xss_clean');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("addcopy");
+			} else {
+				$title = $this->input->post('title');
+				$copies = $this->input->post('copies');
+				$inputs = array( 'book_id'=>$title, 'status'=>'A' );
+				for( $i=0; $i<$copies; $i++ ) {
+					$this->db->insert('copy', $inputs);
+				}
+				$this->session->set_userdata('message', "<strong>$copies copies</strong> Successfully Added!");
+				redirect( '/librarian/view/addcopy', 'refresh' );
+			}
+		}
+	}
+
+	public function damagecopyaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('copyid', 'Copy ID', 'trim|required|xss_clean|callback_valid_copy');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("damagecopy");
+			} else {
+				$copies = $this->input->post('copyid');
+				$this->db->where('id',$copies);
+				$inputs = array( 'status'=>'D' );
+				$this->db->update('copy', $inputs);
+				$this->session->set_userdata('message', "Copy ID: <strong>$copies</strong> Marked as Damaged!");
+				redirect( '/librarian/view/damagecopy', 'refresh' );
+			}
+		}
+	}
+
+	public function valid_copy( $copy ) {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+			$this->db->where('id',$copy);
+			$this->db->from('copy');
+			$this->db->select('book_id');
+			$query = $this->db->get();
+			if( $query->num_rows() == 1 ) {
+				return TRUE;
+			}
+		}
+		$this->form_validation->set_message( 'valid_copy', 'The Copy Doesn\'t Exist' );
+		return FALSE;
+	}
+
+	public function removecopyaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('copyid', 'Copy ID', 'trim|required|xss_clean|callback_valid_copy');
+			
+			if($this->form_validation->run() == FALSE) {
+				$this->view("removecopy");
+			} else {
+				$copies = $this->input->post('copyid');
+				$this->db->where('id',$copies);
+				$inputs = array( 'status'=>'R' );
+				$this->db->update('copy', $inputs);
+				$this->session->set_userdata('message', "Copy ID: <strong>$copies</strong> Removed!");
+				redirect( '/librarian/view/removecopy', 'refresh' );
+			}
 		}
 	}
 }

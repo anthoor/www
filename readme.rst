@@ -13,8 +13,11 @@ This repo contains in-development code for future releases. To download stable s
 *********
 Changelog
 *********
+* Commit: 19-07-2015 11.30AM
 
-* Commit: 19-07-2015 11.40PM
+  * Finished Book menu for Librarian
+  
+* Commit: 18-07-2015 11.40PM
 
   * Finished UI design for Librarian
   * Finished UI design for User

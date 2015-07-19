@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title><?php echo $title; ?></title>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/readable.min.css"; ?>" /><!--journal/readable-->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/readable.min.css"; ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.bootstrap.css"; ?>" />
 		<script src="<?php echo base_url()."js/jquery.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/bootstrap.min.js"; ?>"></script>
@@ -14,8 +14,44 @@
 				padding-bottom:30px;
 			}
 		</style>
+		<?php
+			if( $this->session->userdata('message') ) {
+				echo "
+					<script>
+						$(document).ready(function(){
+							$('#myModal').modal();
+						});
+					</script>
+				";
+			}
+		?>
 	</head>
 	<body>
+<?php
+if( $this->session->userdata('message') ) {
+?>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">Success</h4>
+		</div>
+		<div class="modal-body">
+			<?= $this->session->userdata('message') ?>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+		</div>
+		</div>
+	</div>
+</div>
+<?php
+}
+$this->session->unset_userdata('message');
+?>
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
