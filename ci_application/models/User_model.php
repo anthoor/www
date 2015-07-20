@@ -65,7 +65,59 @@ class User_model extends CI_Model {
 		$string = "SELECT book_limit FROM user, user_type WHERE user.type_id = user_type.id";
 		$query = $this->db->query( $string );
 		$rows = $query->result_array();
-		error_log($row[0]);
 		return $rows[0];
+	}
+
+	public function add( $name, $uname, $password, $type, $mail, $mobile ) {
+		$inputs = array('name'=>$uname, 'password'=>md5($password), 'type_id'=>$type, 'full_name'=>$name, 'email'=>$mail, 'phone'=>$mobile, 'valid'=>1);
+		$this->db->insert( 'user', $inputs );
+	}
+
+	public function suspend( $userid ) {
+		$this->db->where( 'id', $userid );
+		$this->db->update( 'user', array('valid'=>2) );
+	}
+
+	public function unsuspend( $userid ) {
+		$this->db->where( 'id', $userid );
+		$this->db->update( 'user', array('valid'=>1) );
+	}
+
+	public function delete( $userid ) {
+		$this->db->where( 'id', $userid );
+		$this->db->update( 'user', array('valid'=>0) );
+	}
+
+	public function update( $id, $name, $mail, $phone ) {
+		$this->db->where('id', $id);
+		$this->db->update( 'user', array('full_name'=>$name, 'email'=>$mail, 'phone'=>$phone) );
+	}
+
+	public function available( $uname ) {
+		$this->db->select( 'id' );
+		$this->db->from( 'user' );
+		$this->db->where( 'name', $uname );
+		$query = $this->db->get();
+		if( $query->num_rows() == 0 ) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function mail_available( $mail ) {
+		$this->db->select( 'id' );
+		$this->db->from( 'user' );
+		$this->db->where( 'email', $mail );
+		$query = $this->db->get();
+		if( $query->num_rows() == 0 ) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function profile( $userid ) {
+		$string = "SELECT user.name, user.full_name, user.email, user.phone, user_type.name as type FROM user, user_type WHERE user.type_id = user_type.id AND user.id = $userid";
+		$query = $this->db->query($string);
+		return $query->result_array()[0];
 	}
 }

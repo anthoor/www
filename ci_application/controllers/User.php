@@ -4,7 +4,13 @@ class User extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->model('publisher_model');
+		$this->load->model('issue_model');
 		$this->load->model('book_model');
+		$this->load->model('author_model');
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 	}
 
 	public function index() {
@@ -37,42 +43,49 @@ class User extends CI_Controller {
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 
 			switch( $page ) {
-//VIEW SECTION
 				case "viewbooks":	
 					switch( $args ) {
 						case "available":
 							$data['title'] = "View Available Books";
-							$data['authors'] = $this->book_model->get_authors();
+							$data['authors'] = $this->author_model->get_written();
 							$data['books'] = $this->book_model->get_books();
 							$data['toggle'] = "Available";
 							break;
 						default:
 							$data['title'] = "View All Books";
-							$data['authors'] = $this->book_model->get_authors();
+							$data['authors'] = $this->author_model->get_written();
 							$data['books'] = $this->book_model->get_all_books();
 							$data['toggle'] = "All";
 					}
 					break;
 				case "viewauthors":
 					$data['title'] = "View Authors";
-					$data['bauthors'] = $this->book_model->authors();
+					$data['bauthors'] = $this->author_model->get();
 					break;
 				case "viewpublishers":
 					$data['title'] = "View Publishers";
-					$data['publishers'] = $this->book_model->publishers();
+					$data['publishers'] = $this->publisher_model->get();
 					break;
 				case "viewissues":	
 					switch( $args ) {
 						case "pending":
 							$data['title'] = "View Pending Issues";
-							$data['issues'] = $this->book_model->pending_issues();
+							$data['issues'] = $this->issue_model->get_pending();
 							$data['toggle'] = "Pending";
 							break;
 						default:
 							$data['title'] = "View All Issues";
-							$data['issues'] = $this->book_model->issues();
+							$data['issues'] = $this->issue_model->get();
 							$data['toggle'] = "All";
 					}
+					break;
+				case "viewprofile":
+					$data['title'] = "Profile";
+					$data['profile'] = $this->user_model->profile($session_data['id']);
+					break;
+				case "editprofile":
+					$data['title'] = "Update Profile";
+					$data['profile'] = $this->user_model->profile($session_data['id']);
 					break;
 			}
 			$active = array();
@@ -82,6 +95,30 @@ class User extends CI_Controller {
 			$this->load->view('templates/uheader', $data);
 			$this->load->view("user/$page", $data);
 			$this->load->view('templates/ufooter', $data);
+		} else if( $this->session->userdata('logged_in') ) {
+			redirect( '/librarian', 'refresh' );
+		} else {
+			redirect( '/login', 'refresh' );
+		}
+	}
+
+	public function editprofileaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
+
+			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("editprofile");
+			} else {
+				$name = $this->input->post('name');
+				$mail = $this->input->post('email');
+				$phone = $this->input->post('mobile');
+				$session_data = $this->session->userdata('logged_in');
+				$this->user_model->update( $session_data['id'], $name, $mail, $phone );
+				$this->session->set_userdata('message', "User Successfully Updated!");
+				redirect( '/user/view/editprofile', 'redirect' );
+			}
 		} else if( $this->session->userdata('logged_in') ) {
 			redirect( '/librarian', 'refresh' );
 		} else {

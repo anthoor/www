@@ -14,6 +14,11 @@ This repo contains in-development code for future releases. To download stable s
 Changelog
 *********
 
+* Commit: 20-07-2015 12.01PM - Release v1.0
+
+  * Finished User menu for Librarian
+  * Finished Profile menu for User and Librarian
+
 * Commit: 19-07-2015 11.05PM
 
   * Finished Issue menu for Librarian

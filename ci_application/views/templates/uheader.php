@@ -4,6 +4,7 @@
 		<title><?php echo $title; ?></title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/readable.min.css"; ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.bootstrap.css"; ?>" />
+		<link rel="shortcut icon" href="<?= base_url()."favicon.ico" ?>" />
 		<script src="<?php echo base_url()."js/jquery.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/bootstrap.min.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/datatables.js"; ?>"></script>
@@ -60,8 +61,8 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">Profile Actions</li>
-								<li><a href="#">View Profile</a></li>
-								<li><a href="#">Edit Profile</a></li>
+								<li><a href="/index.php/user/view/viewprofile">View Profile</a></li>
+								<li><a href="/index.php/user/view/editprofile">Edit Profile</a></li>
 								<li role="separator" class="divider"></li>
 								<li class="dropdown-header">User Actions</li>
 								<li><a href="/index.php/login/logout">Logout</a></li>

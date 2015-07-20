@@ -133,8 +133,16 @@ class Librarian extends CI_Controller {
 					$data['title'] = "Remove User";
 					$data['users'] = $this->user_model->get_deletable();
 					break;
+				case "viewprofile":
+					$data['title'] = "Profile";
+					$data['profile'] = $this->user_model->profile($session_data['id']);
+					break;
+				case "editprofile":
+					$data['title'] = "Update Profile";
+					$data['profile'] = $this->user_model->profile($session_data['id']);
+					break;
 			}
-			$data['active'] = $active;
+			
 			$this->load->view('templates/lheader', $data);
 			$this->load->view("librarian/$page", $data);
 			$this->load->view('templates/lfooter', $data);
@@ -304,11 +312,100 @@ class Librarian extends CI_Controller {
 				$issues = $this->input->post('issue[]');
 				foreach( $issues as $issue ) {
 					$this->return_model->add( $issue );
-					error_log($this->issue_model->get_copy($issue));
 					$this->copy_model->return_copy( $this->issue_model->get_copy($issue) );
 				}
 				$this->session->set_userdata('message', "All Selected Issues Successfully Returned!");
 				redirect( '/librarian/view/return', 'redirect' );
+			}
+		}
+	}
+
+	public function adduseraction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('uname', 'User Name', 'trim|required|xss_clean|callback_user_available');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('type', 'User Type', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|callback_mail_available');
+			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("adduser");
+			} else {
+				$name = $this->input->post('name');
+				$uname = $this->input->post('uname');
+				$password = $this->input->post('password');
+				$type = $this->input->post('type');
+				$email = $this->input->post('email');
+				$mobile = $this->input->post('mobile');
+				$this->user_model->add( $name, $uname, $password, $type, $email, $mobile );
+				$this->session->set_userdata('message', "User: <strong>$name</strong> Successfully Added!");
+				redirect( '/librarian/view/adduser', 'redirect' );
+			}
+		}
+	}
+
+	public function suspenduseraction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("suspenduser");
+			} else {
+				$user = $this->input->post('user');
+				$this->user_model->suspend( $user );
+				$this->session->set_userdata('message', "User Successfully Suspended!");
+				redirect( '/librarian/view/suspenduser', 'redirect' );
+			}
+		}
+	}
+
+	public function revokesuspensionaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("revokesuspension");
+			} else {
+				$user = $this->input->post('user');
+				$this->user_model->unsuspend( $user );
+				$this->session->set_userdata('message', "Suspension of User Successfully Revoked!");
+				redirect( '/librarian/view/revokesuspension', 'redirect' );
+			}
+		}
+	}
+
+	public function removeuseraction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("removeuser");
+			} else {
+				$user = $this->input->post('user');
+				$this->user_model->delete( $user );
+				$this->session->set_userdata('message', "User Successfully Deleted!");
+				redirect( '/librarian/view/removeuser', 'redirect' );
+			}
+		}
+	}
+
+	public function editprofileaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("editprofile");
+			} else {
+				$name = $this->input->post('name');
+				$mail = $this->input->post('email');
+				$phone = $this->input->post('mobile');
+				$session_data = $this->session->userdata('logged_in');
+				$this->user_model->update( $session_data['id'], $name, $mail, $phone );
+				$this->session->set_userdata('message', "User Successfully Updated!");
+				redirect( '/librarian/view/editprofile', 'redirect' );
 			}
 		}
 	}
@@ -328,6 +425,26 @@ class Librarian extends CI_Controller {
 			}
 		}
 		$this->form_validation->set_message( 'valid_copy', 'The Copy Doesn\'t Exist' );
+		return FALSE;
+	}
+
+	public function user_available( $username ) {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+			if( $this->user_model->available( $username ) ) {
+				return TRUE;
+			}
+		}
+		$this->form_validation->set_message( 'user_available', 'The Username is already taken' );
+		return FALSE;
+	}
+
+	public function mail_available( $mail ) {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+			if( $this->user_model->mail_available( $mail ) ) {
+				return TRUE;
+			}
+		}
+		$this->form_validation->set_message( 'mail_available', 'The E Mail is already taken' );
 		return FALSE;
 	}
 }

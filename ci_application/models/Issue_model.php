@@ -18,7 +18,6 @@ class Issue_model extends CI_Model {
 
 	public function renew( $id ) {
 		$this->db->where( 'id', $id );
-		date_default_timezone_set("Asia/Kolkata");
 		$this->db->update( 'issue', array( 'date'=>date('Y-m-d h:i:s') ) );
 	}
 
