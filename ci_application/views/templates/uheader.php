@@ -15,8 +15,44 @@
 				padding-bottom:30px;
 			}
 		</style>
+		<?php
+			if( $this->session->userdata('message') ) {
+				echo "
+					<script>
+						$(document).ready(function(){
+							$('#myModal').modal();
+						});
+					</script>
+				";
+			}
+		?>
 	</head>
 	<body>
+<?php
+if( $this->session->userdata('message') ) {
+?>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">Success</h4>
+		</div>
+		<div class="modal-body">
+			<?= $this->session->userdata('message') ?>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+		</div>
+		</div>
+	</div>
+</div>
+<?php
+}
+$this->session->unset_userdata('message');
+?>
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -63,6 +99,7 @@
 								<li class="dropdown-header">Profile Actions</li>
 								<li><a href="/index.php/user/view/viewprofile">View Profile</a></li>
 								<li><a href="/index.php/user/view/editprofile">Edit Profile</a></li>
+								<li><a href="/index.php/user/view/changepassword">Change Password</a></li>
 								<li role="separator" class="divider"></li>
 								<li class="dropdown-header">User Actions</li>
 								<li><a href="/index.php/login/logout">Logout</a></li>

@@ -93,6 +93,11 @@ class User_model extends CI_Model {
 		$this->db->update( 'user', array('full_name'=>$name, 'email'=>$mail, 'phone'=>$phone) );
 	}
 
+	public function update_password( $id, $password ) {
+		$this->db->where( 'id', $id );
+		$this->db->update( 'user', array('password'=>md5($password)) );
+	}
+
 	public function available( $uname ) {
 		$this->db->select( 'id' );
 		$this->db->from( 'user' );
@@ -111,6 +116,20 @@ class User_model extends CI_Model {
 		$query = $this->db->get();
 		if( $query->num_rows() == 0 ) {
 			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function password_confirm( $id, $password ) {
+		$this->db->select( 'password' );
+		$this->db->from( 'user' );
+		$this->db->where( 'id', $id );
+		$query = $this->db->get();
+		if( $query->num_rows() == 1 ) {
+			$result = $query->result_array()[0];
+			if( md5($password) == $result['password'] ) {
+				return TRUE;
+			}
 		}
 		return FALSE;
 	}

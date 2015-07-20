@@ -146,6 +146,7 @@ $this->session->unset_userdata('message');
 								<li class="dropdown-header">Profile Actions</li>
 								<li><a href="/index.php/librarian/view/viewprofile">View Profile</a></li>
 								<li><a href="/index.php/librarian/view/editprofile">Edit Profile</a></li>
+								<li><a href="/index.php/librarian/view/changepassword">Change Password</a></li>
 								<li role="separator" class="divider"></li>
 								<li class="dropdown-header">User Actions</li>
 								<li><a href="/index.php/login/logout">Logout</a></li>

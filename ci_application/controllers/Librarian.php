@@ -141,6 +141,9 @@ class Librarian extends CI_Controller {
 					$data['title'] = "Update Profile";
 					$data['profile'] = $this->user_model->profile($session_data['id']);
 					break;
+				case "changepassword":
+					$data['title'] = "Change Password";
+					break;
 			}
 			
 			$this->load->view('templates/lheader', $data);
@@ -393,6 +396,7 @@ class Librarian extends CI_Controller {
 	public function editprofileaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
+			$this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
@@ -406,6 +410,24 @@ class Librarian extends CI_Controller {
 				$this->user_model->update( $session_data['id'], $name, $mail, $phone );
 				$this->session->set_userdata('message', "User Successfully Updated!");
 				redirect( '/librarian/view/editprofile', 'redirect' );
+			}
+		}
+	}
+
+	public function changepasswordaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
+
+			$this->form_validation->set_rules('opassword', 'Current Password', 'trim|required|xss_clean|callback_password_confirm');
+			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|xss_clean|matches[npassword]');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("changepassword");
+			} else {
+				$password = $this->input->post('npassword');
+				$session_data = $this->session->userdata('logged_in');
+				$this->user_model->update_password( $session_data['id'], $password );
+				$this->session->set_userdata('message', "Password Successfully Updated!");
+				redirect( '/librarian/view/changepassword', 'redirect' );
 			}
 		}
 	}
@@ -445,6 +467,15 @@ class Librarian extends CI_Controller {
 			}
 		}
 		$this->form_validation->set_message( 'mail_available', 'The E Mail is already taken' );
+		return FALSE;
+	}
+
+	public function password_confirm( $password ) {
+		$session_data = $this->session->userdata('logged_in');
+		if( $this->user_model->password_confirm($session_data['id'], $password) ){
+			return TRUE;
+		}
+		$this->form_validation->set_message( 'password_confirm', 'The Current Password is wrong' );
 		return FALSE;
 	}
 }

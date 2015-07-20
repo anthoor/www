@@ -14,6 +14,10 @@ This repo contains in-development code for future releases. To download stable s
 Changelog
 *********
 
+* Commit: 20-07-2015 3.00PM
+
+  * Added Password Change feature for Librarian and User
+
 * Commit: 20-07-2015 12.01PM - Release v1.0
 
   * Finished User menu for Librarian

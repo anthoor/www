@@ -87,6 +87,9 @@ class User extends CI_Controller {
 					$data['title'] = "Update Profile";
 					$data['profile'] = $this->user_model->profile($session_data['id']);
 					break;
+				case "changepassword":
+					$data['title'] = "Change Password";
+					break;
 			}
 			$active = array();
 			$active['home'] = "active";
@@ -124,5 +127,32 @@ class User extends CI_Controller {
 		} else {
 			redirect( '/login', 'refresh' );
 		}
+	}
+
+	public function changepasswordaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
+
+			$this->form_validation->set_rules('opassword', 'Current Password', 'trim|required|xss_clean|callback_password_confirm');
+			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|xss_clean|matches[npassword]');
+			if($this->form_validation->run() == FALSE) {
+				$this->view("changepassword");
+			} else {
+				$password = $this->input->post('npassword');
+				$session_data = $this->session->userdata('logged_in');
+				$this->user_model->update_password( $session_data['id'], $password );
+				$this->session->set_userdata('message', "Password Successfully Updated!");
+				redirect( '/user/view/changepassword', 'redirect' );
+			}
+		}
+	}
+
+	public function password_confirm( $password ) {
+		$session_data = $this->session->userdata('logged_in');
+		if( $this->user_model->password_confirm($session_data['id'], $password) ){
+			return TRUE;
+		}
+		$this->form_validation->set_message( 'password_confirm', 'The Current Password is wrong' );
+		return FALSE;
 	}
 }
