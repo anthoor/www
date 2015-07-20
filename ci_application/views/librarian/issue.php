@@ -11,7 +11,7 @@
 				<div class="form-group">
 					<label for="copyid">Copy ID</label>
 					<input type="number" name="copyid" id="copyid" class="form-control"
-						value="<?= set_value('copyid') ?>" required
+						value="<?= set_value('copyid') ?>" required max="9999999999"
 						placeholder="Copy ID Printed on the Book" />
 				</div>
 				<div class="form-group">

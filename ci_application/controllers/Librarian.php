@@ -157,9 +157,9 @@ class Librarian extends CI_Controller {
 	public function addauthoraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('fname', 'First Name', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('mname', 'Middle Name', 'trim|xss_clean');
-			$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('fname', 'First Name', 'trim|required|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('mname', 'Middle Name', 'trim|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|xss_clean|max_length[50]');
 			
 			if($this->form_validation->run() == FALSE) {
 				$this->view("addauthor");
@@ -177,7 +177,7 @@ class Librarian extends CI_Controller {
 	public function addpublisheraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 			
-			$this->form_validation->set_rules('pname', 'Publisher Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('pname', 'Publisher Name', 'trim|required|xss_clean|max_length[200]');
 			
 			if($this->form_validation->run() == FALSE) {
 				$this->view("addpublisher");
@@ -193,11 +193,11 @@ class Librarian extends CI_Controller {
 	public function addbookaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('authors[]', 'Authors', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('edition', 'Edition', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('year', 'Year of Publication', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('publisher', 'Publisher', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('edition', 'Edition', 'trim|required|xss_clean|max_length[3]|integer');
+			$this->form_validation->set_rules('year', 'Year of Publication', 'trim|required|xss_clean|max_length[4]|integer');
+			$this->form_validation->set_rules('publisher', 'Publisher', 'trim|required|xss_clean|integer');
 			
 			if($this->form_validation->run() == FALSE) {
 				$this->view("addbook");
@@ -220,8 +220,8 @@ class Librarian extends CI_Controller {
 	public function addcopyaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('copies', 'Copies', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('title', 'Book Title', 'trim|required|xss_clean|integer|max_length[8]');
+			$this->form_validation->set_rules('copies', 'Number of Copies', 'trim|required|xss_clean|integer|less_than[20]');
 			
 			if($this->form_validation->run() == FALSE) {
 				$this->view("addcopy");
@@ -326,12 +326,12 @@ class Librarian extends CI_Controller {
 	public function adduseraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('uname', 'User Name', 'trim|required|xss_clean|callback_user_available');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('type', 'User Type', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|callback_mail_available');
-			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
+			$this->form_validation->set_rules('uname', 'User Name', 'trim|required|xss_clean|max_length[50]|callback_user_available');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|max_length[32]');
+			$this->form_validation->set_rules('type', 'User Type', 'trim|required|xss_clean|integer|max_length[5]');
+			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]|callback_mail_available');
+			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean|integer|max_length[15]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("adduser");
 			} else {
@@ -351,7 +351,7 @@ class Librarian extends CI_Controller {
 	public function suspenduseraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("suspenduser");
 			} else {
@@ -366,7 +366,7 @@ class Librarian extends CI_Controller {
 	public function revokesuspensionaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("revokesuspension");
 			} else {
@@ -381,7 +381,7 @@ class Librarian extends CI_Controller {
 	public function removeuseraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("removeuser");
 			} else {
@@ -397,9 +397,9 @@ class Librarian extends CI_Controller {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
+			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]');
+			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean|integer|max_length[15]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("editprofile");
 			} else {
@@ -418,7 +418,7 @@ class Librarian extends CI_Controller {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
 			$this->form_validation->set_rules('opassword', 'Current Password', 'trim|required|xss_clean|callback_password_confirm');
-			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean|max_length[32]');
 			$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|xss_clean|matches[npassword]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("changepassword");

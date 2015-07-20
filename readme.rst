@@ -14,6 +14,11 @@ This repo contains in-development code for future releases. To download stable s
 Changelog
 *********
 
+* Commit: 20-07-2015 10.10PM - Release v1.3
+
+  * Added validation at front-end and back-end
+  * Fixed overflow of dialog box contents
+
 * Commit: 20-07-2015 3.00PM
 
   * Added Password Change feature for Librarian and User

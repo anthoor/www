@@ -49,8 +49,8 @@ class Login extends CI_Controller {
 	public function verifylogin() {
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|max_length[50]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
 		
 		if($this->form_validation->run() == FALSE) {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');

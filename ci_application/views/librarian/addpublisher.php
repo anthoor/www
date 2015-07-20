@@ -12,7 +12,7 @@
 					<label for="pname">Publisher Name</label>
 					<input type="text" name="pname" id="pname" class="form-control"
 						value="<?= set_value('pname') ?>" required autofocus
-						placeholder="Publisher Name" />
+						placeholder="Publisher Name" maxlength="200" />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
 					<?= validation_errors() ?>

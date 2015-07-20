@@ -12,13 +12,13 @@
 					<label for="username">Username</label> <input type="text"
 						name="username" id="username" class="form-control"
 						value="<?php echo set_value('username'); ?>"
-						placeholder="Username" />
+						placeholder="Username" maxlength="50" required autofocus />
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label> <input type="password"
 						name="password" id="password" class="form-control"
 						value="<?php echo set_value('password'); ?>"
-						placeholder="Password" />
+						placeholder="Password" maxlength="32" required />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
 					<?php echo validation_errors(); ?>

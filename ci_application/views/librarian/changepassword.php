@@ -10,7 +10,7 @@
 		<td colspan="2" style="vertical-align:middle !important;">
 			<div class="form-group">
 				<label for="opassword">Current Password</label>
-				<input type="password" name="opassword" id="opassword" class="form-control" required />
+				<input type="password" name="opassword" id="opassword" class="form-control" required maxlength="32" />
 			</div>
 		</td>
 	</tr>
@@ -18,7 +18,7 @@
 		<td>
 			<div class="form-group">
 				<label for="npassword">New Password</label>
-				<input type="password" name="npassword" id="npassword" class="form-control" required />
+				<input type="password" name="npassword" id="npassword" class="form-control" required maxlength="32" />
 			</div>
 		</td>
 	</tr>
@@ -26,7 +26,7 @@
 		<td>
 			<div class="form-group">
 				<label for="cpassword">Confirm Password</label>
-				<input type="password" name="cpassword" id="cpassword" class="form-control" required />
+				<input type="password" name="cpassword" id="cpassword" class="form-control" required maxlength="32" />
 			</div>
 		</td>
 	</tr>

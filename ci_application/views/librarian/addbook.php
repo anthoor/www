@@ -12,7 +12,7 @@
 					<label for="title">Title</label>
 					<input type="text" name="title" id="title" class="form-control"
 						value="<?php echo set_value('title'); ?>" required autofocus
-						placeholder="Book Title" />
+						placeholder="Book Title" maxlength="200" />
 				</div>
 				<div class="form-group">
 					<label for="authors">Authors</label>
@@ -28,7 +28,7 @@
 					<label for="edition">Edition</label>
 					<input type="number" name="edition" id="edition" class="form-control"
 						value="<?php echo set_value('edition'); ?>" required
-						min="1" placeholder="Book Edition" />
+						min="1" placeholder="Book Edition" max="100" />
 				</div>
 				<div class="form-group">
 					<label for="year">Year</label>
@@ -56,3 +56,6 @@
 	<div class="col-md-2"></div>
 </div>
 <div style="height:50px;"> &nbsp; </div>
+<script>
+$(document).ready(function(){$("#year").attr({max:(new Date).getFullYear()})});
+</script>

@@ -40,7 +40,7 @@ if( $this->session->userdata('message') ) {
 			</button>
 			<h4 class="modal-title" id="myModalLabel">Success</h4>
 		</div>
-		<div class="modal-body">
+		<div class="modal-body" style="word-wrap:break-word">
 			<?= $this->session->userdata('message') ?>
 		</div>
 		<div class="modal-footer">

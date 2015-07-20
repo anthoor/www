@@ -108,9 +108,9 @@ class User extends CI_Controller {
 	public function editprofileaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
 
-			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
+			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]');
+			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean|integer|max_length[15]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("editprofile");
 			} else {
@@ -133,7 +133,7 @@ class User extends CI_Controller {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
 
 			$this->form_validation->set_rules('opassword', 'Current Password', 'trim|required|xss_clean|callback_password_confirm');
-			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean|max_length[32]');
 			$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|xss_clean|matches[npassword]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("changepassword");

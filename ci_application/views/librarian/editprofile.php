@@ -10,7 +10,8 @@
 		<td width="90%" style="vertical-align:middle !important;">
 			<div class="form-group">
 				<label for="name">Full Name</label>
-				<input type="text" name="name" id="name" value="<?= $profile['full_name'] ?>" class="form-control" required autofocus/>
+				<input type="text" name="name" id="name" value="<?= $profile['full_name'] ?>"
+					class="form-control" required autofocus maxlength="200" />
 			</div>
 		</td>
 	</tr>
@@ -18,7 +19,8 @@
 		<td style="vertical-align:middle !important;">
 			<div class="form-group">
 				<label for="email">E Mail</label>
-				<input type="email" name="email" id="email" value="<?= $profile['email'] ?>" class="form-control" required />
+				<input type="email" name="email" id="email" value="<?= $profile['email'] ?>"
+					class="form-control" required maxlength="200" />
 			</div>
 		</td>
 	</tr>
@@ -26,7 +28,8 @@
 		<td style="vertical-align:middle !important;">
 			<div class="form-group">
 				<label for="mobile">Mobile</label>
-				<input type="text" name="mobile" id="mobile" value="<?= $profile['phone'] ?>" class="form-control" required />
+				<input type="number" name="mobile" id="mobile" value="<?= $profile['phone'] ?>"
+					class="form-control" required max="999999999999999" />
 			</div>
 		</td>
 	</tr>

@@ -24,7 +24,7 @@
 					<label for="copies">Number of Copies</label>
 					<input type="number" name="copies" id="copies" class="form-control"
 						value="<?php echo set_value('copies'); ?>" required
-						min="1" placeholder="Number of New Copies" />
+						min="1" max="20" maxlength="2" placeholder="Number of New Copies" />
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
 					<?= validation_errors() ?>
