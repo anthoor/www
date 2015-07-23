@@ -14,6 +14,10 @@ This repo contains in-development code for future releases. To download stable s
 Changelog
 *********
 
+* Commit: 23-07-2015 8.00PM - Release v1.4.3
+
+  * Added profile picture for librarian
+
 * Commit: 20-07-2015 10.10PM - Release v1.3
 
   * Added validation at front-end and back-end
@@ -93,5 +97,5 @@ Report security issues to `Security Panel <mailto:security@codeigniter.com>`_, t
 Acknowledgement
 ***************
 
-I would like to thank The CodeIgniter team, EllisLab, DataTables team,  all the
-contributors to the CodeIgniter project and you, the CSEDL Manager user.
+I would like to thank The CodeIgniter team, EllisLab, DataTables team, Jasny Bootstrap,
+all the contributors to the CodeIgniter project and you, the CSEDL Manager user.

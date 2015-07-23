@@ -1,11 +1,11 @@
 <html>
 	<head>
 		<title><?php echo $title; ?></title>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/cosmos.min.css"; ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/cosmos.css"; ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."css/datatables.bootstrap.css"; ?>" />
 		<link rel="shortcut icon" href="<?= base_url()."favicon.ico" ?>" />
 		<script src="<?php echo base_url()."js/jquery.js"; ?>"></script>
-		<script src="<?php echo base_url()."js/bootstrap.min.js"; ?>"></script>
+		<script src="<?php echo base_url()."js/bootstrap.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/datatables.js"; ?>"></script>
 		<script src="<?php echo base_url()."js/datatables.bootstrap.js"; ?>"></script>
 		<style>

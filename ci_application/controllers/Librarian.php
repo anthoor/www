@@ -144,6 +144,9 @@ class Librarian extends CI_Controller {
 				case "changepassword":
 					$data['title'] = "Change Password";
 					break;
+				case "updatedp":
+					$data['title'] = "Update Profile Picture";
+					break;
 			}
 			
 			$this->load->view('templates/lheader', $data);
@@ -328,7 +331,7 @@ class Librarian extends CI_Controller {
 
 			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('uname', 'User Name', 'trim|required|xss_clean|max_length[50]|callback_user_available');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|max_length[32]');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]|max_length[32]');
 			$this->form_validation->set_rules('type', 'User Type', 'trim|required|xss_clean|integer|max_length[5]');
 			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]|callback_mail_available');
 			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean|integer|max_length[15]');
@@ -341,7 +344,8 @@ class Librarian extends CI_Controller {
 				$type = $this->input->post('type');
 				$email = $this->input->post('email');
 				$mobile = $this->input->post('mobile');
-				$this->user_model->add( $name, $uname, $password, $type, $email, $mobile );
+				$dp = "ci.png";
+				$this->user_model->add( $name, $uname, $password, $type, $email, $mobile, $dp );
 				$this->session->set_userdata('message', "User: <strong>$name</strong> Successfully Added!");
 				redirect( '/librarian/view/adduser', 'redirect' );
 			}
@@ -351,7 +355,7 @@ class Librarian extends CI_Controller {
 	public function suspenduseraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]');
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]|callback_is_not_self');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("suspenduser");
 			} else {
@@ -381,7 +385,7 @@ class Librarian extends CI_Controller {
 	public function removeuseraction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
-			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]');
+			$this->form_validation->set_rules('user', 'User', 'trim|required|xss_clean|integer|max_length[5]|callback_is_not_self');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("removeuser");
 			} else {
@@ -396,6 +400,20 @@ class Librarian extends CI_Controller {
 	public function editprofileaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
+			$session_data = $this->session->userdata('logged_in');
+
+			$imgname = hash( "sha512", $session_data['id'], FALSE );
+
+			$config['upload_path'] = './uploads/';
+			$config['file_name'] = $imgname;
+            $config['allowed_types'] = 'png|gif|jpg';
+            $config['max_size'] = 300;
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+            $config['overwrite'] = TRUE;
+            $config['file_ext_tolower'] = TRUE;
+
+            $this->load->library('upload', $config);
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]');
@@ -406,9 +424,18 @@ class Librarian extends CI_Controller {
 				$name = $this->input->post('name');
 				$mail = $this->input->post('email');
 				$phone = $this->input->post('mobile');
-				$session_data = $this->session->userdata('logged_in');
 				$this->user_model->update( $session_data['id'], $name, $mail, $phone );
-				$this->session->set_userdata('message', "User Successfully Updated!");
+				$img = $this->input->post('dp');
+
+				if ( !$this->upload->do_upload("dp") && $_FILES['dp']['name'] != null ) {
+					$this->session->set_userdata('message', $this->upload->display_errors());
+				} else {
+					if($_FILES['dp']['name'] != null) {
+						$ext = $this->upload->data('file_ext');
+						$this->user_model->set_dp( $session_data['id'], $imgname.$ext );
+					}
+					$this->session->set_userdata('message', "User Successfully Updated!");
+				}
 				redirect( '/librarian/view/editprofile', 'redirect' );
 			}
 		}
@@ -418,7 +445,7 @@ class Librarian extends CI_Controller {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
 			$this->form_validation->set_rules('opassword', 'Current Password', 'trim|required|xss_clean|callback_password_confirm');
-			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean|max_length[32]');
+			$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|xss_clean|min_length[6]|max_length[32]');
 			$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|xss_clean|matches[npassword]');
 			if($this->form_validation->run() == FALSE) {
 				$this->view("changepassword");
@@ -476,6 +503,15 @@ class Librarian extends CI_Controller {
 			return TRUE;
 		}
 		$this->form_validation->set_message( 'password_confirm', 'The Current Password is wrong' );
+		return FALSE;
+	}
+
+	public function is_not_self( $userid ) {
+		$session_data = $this->session->userdata('logged_in');
+		if( $session_data['id'] != $userid ) {
+			return TRUE;
+		}
+		$this->form_validation->set_message( 'is_not_self', 'Cannot modify current user' );
 		return FALSE;
 	}
 }

@@ -30,6 +30,7 @@ class User_model extends CI_Model {
 		$this->db->select( 'id, name, full_name' );
 		$this->db->from( 'user' );
 		$this->db->where( 'valid', 1 );
+		$this->db->order_by( 'full_name' );
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -38,12 +39,13 @@ class User_model extends CI_Model {
 		$this->db->select( 'id, name, full_name' );
 		$this->db->from( 'user' );
 		$this->db->where( 'valid', 2 );
+		$this->db->order_by( 'full_name' );
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
 	public function get_deletable() {
-		$query = $this->db->query("SELECT id, name, full_name FROM user WHERE valid<>0");
+		$query = $this->db->query("SELECT id, name, full_name FROM user WHERE valid<>0 ORDER BY full_name");
 		return $query->result_array();
 	}
 
@@ -68,8 +70,8 @@ class User_model extends CI_Model {
 		return $rows[0];
 	}
 
-	public function add( $name, $uname, $password, $type, $mail, $mobile ) {
-		$inputs = array('name'=>$uname, 'password'=>md5($password), 'type_id'=>$type, 'full_name'=>$name, 'email'=>$mail, 'phone'=>$mobile, 'valid'=>1);
+	public function add( $name, $uname, $password, $type, $mail, $mobile, $dp ) {
+		$inputs = array('name'=>$uname, 'password'=>md5($password), 'type_id'=>$type, 'full_name'=>$name, 'email'=>$mail, 'phone'=>$mobile, 'dpfile'=>$dp, 'valid'=>1);
 		$this->db->insert( 'user', $inputs );
 	}
 
@@ -91,6 +93,11 @@ class User_model extends CI_Model {
 	public function update( $id, $name, $mail, $phone ) {
 		$this->db->where('id', $id);
 		$this->db->update( 'user', array('full_name'=>$name, 'email'=>$mail, 'phone'=>$phone) );
+	}
+
+	public function set_dp( $id, $dp ) {
+		$this->db->where( 'id', $id );
+		$this->db->update( 'user', array('dpfile'=>$dp) );
 	}
 
 	public function update_password( $id, $password ) {
@@ -135,7 +142,7 @@ class User_model extends CI_Model {
 	}
 
 	public function profile( $userid ) {
-		$string = "SELECT user.name, user.full_name, user.email, user.phone, user_type.name as type FROM user, user_type WHERE user.type_id = user_type.id AND user.id = $userid";
+		$string = "SELECT user.name, user.full_name, user.email, user.phone, user.dpfile, user_type.name as type FROM user, user_type WHERE user.type_id = user_type.id AND user.id = $userid";
 		$query = $this->db->query($string);
 		return $query->result_array()[0];
 	}

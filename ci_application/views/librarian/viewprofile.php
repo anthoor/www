@@ -6,7 +6,7 @@
 
 <table class="table table-bordered">
 	<tr>
-		<td width="10%" rowspan="3"><img src="<?= base_url()."css/ci.png"?>" width="200px" /></td>
+		<td width="10%" rowspan="3"><img src="<?= base_url()."uploads/".$profile['dpfile'] ?>" width="200px" /></td>
 		<td width="90%" colspan="2" style="vertical-align:middle !important;"><strong>Full Name: </strong><?= $profile['full_name'] ?></td>
 	</tr>
 	<tr>

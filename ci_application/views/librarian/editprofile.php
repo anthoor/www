@@ -3,10 +3,24 @@
 		<h3 class="panel-title">Update Profile</h3>
 	</div>
 </div>
-<?= form_open('/librarian/editprofileaction') ?>
+<?= form_open_multipart('/librarian/editprofileaction') ?>
 <table class="table table-bordered">
 	<tr>
-		<td width="10%" rowspan="3" style="vertical-align:middle !important;"><img src="<?= base_url()."css/ci.png"?>" width="200px" /></td>
+		<td width="10%" rowspan="3" style="vertical-align:middle !important;">
+			<div class="fileinput fileinput-new" data-provides="fileinput">
+				<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
+					Click Here to Change Picture
+				</div>
+				<div>
+					<span class="btn btn-default btn-file fileinput-exists">
+						<span class="fileinput-new">Select image</span>
+						<span class="fileinput-exists">Change</span>
+						<input type="file" name="dp" accept="image/jpeg,image/png,image/gif" />
+					</span>
+					<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+				</div>
+			</div>
+		</td>
 		<td width="90%" style="vertical-align:middle !important;">
 			<div class="form-group">
 				<label for="name">Full Name</label>
