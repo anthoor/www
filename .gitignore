@@ -6,6 +6,7 @@
 */cache/!.htaccess
 
 user_guide
+uploads/*
 
 # =========================
 # Operating System Files
