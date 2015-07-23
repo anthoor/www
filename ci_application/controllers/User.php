@@ -108,6 +108,21 @@ class User extends CI_Controller {
 	public function editprofileaction() {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
 
+			$session_data = $this->session->userdata('logged_in');
+
+			$imgname = hash( "sha512", $session_data['id'], FALSE );
+
+			$config['upload_path'] = './uploads/';
+			$config['file_name'] = $imgname;
+            $config['allowed_types'] = 'png|gif|jpg';
+            $config['max_size'] = 300;
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+            $config['overwrite'] = TRUE;
+            $config['file_ext_tolower'] = TRUE;
+
+            $this->load->library('upload', $config);
+
 			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean|integer|max_length[15]');
@@ -117,15 +132,20 @@ class User extends CI_Controller {
 				$name = $this->input->post('name');
 				$mail = $this->input->post('email');
 				$phone = $this->input->post('mobile');
-				$session_data = $this->session->userdata('logged_in');
+				
 				$this->user_model->update( $session_data['id'], $name, $mail, $phone );
-				$this->session->set_userdata('message', "User Successfully Updated!");
+
+				if ( !$this->upload->do_upload("dp") && $_FILES['dp']['name'] != null ) {
+					$this->session->set_userdata('message', $this->upload->display_errors());
+				} else {
+					if($_FILES['dp']['name'] != null) {
+						$ext = $this->upload->data('file_ext');
+						$this->user_model->set_dp( $session_data['id'], $imgname.$ext );
+					}
+					$this->session->set_userdata('message', "User Successfully Updated!");
+				}
 				redirect( '/user/view/editprofile', 'redirect' );
 			}
-		} else if( $this->session->userdata('logged_in') ) {
-			redirect( '/librarian', 'refresh' );
-		} else {
-			redirect( '/login', 'refresh' );
 		}
 	}
 

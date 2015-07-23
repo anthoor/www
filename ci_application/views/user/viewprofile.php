@@ -6,7 +6,7 @@
 
 <table class="table table-bordered">
 	<tr>
-		<td width="10%" rowspan="3"><img src="<?= base_url()."css/ci.png"?>" width="200px" /></td>
+		<td width="10%" rowspan="3"><img src="<?php if($profile['dpfile'] == null){$profile['dpfile'] = "ci.png";} echo base_url()."uploads/".$profile['dpfile']; ?>" style="max-width:200px; max-height:200px;" /></td>
 		<td width="90%" colspan="2"><strong>Full Name: </strong><?= $profile['full_name'] ?></td>
 	</tr>
 	<tr>

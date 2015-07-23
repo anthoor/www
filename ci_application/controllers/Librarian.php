@@ -414,7 +414,7 @@ class Librarian extends CI_Controller {
             $config['file_ext_tolower'] = TRUE;
 
             $this->load->library('upload', $config);
-			$this->load->library('form_validation');
+
 			$this->form_validation->set_rules('name', 'Full Name', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('email', 'E Mail', 'trim|required|xss_clean|max_length[200]');
 			$this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|xss_clean|integer|max_length[15]');
@@ -424,8 +424,8 @@ class Librarian extends CI_Controller {
 				$name = $this->input->post('name');
 				$mail = $this->input->post('email');
 				$phone = $this->input->post('mobile');
+				
 				$this->user_model->update( $session_data['id'], $name, $mail, $phone );
-				$img = $this->input->post('dp');
 
 				if ( !$this->upload->do_upload("dp") && $_FILES['dp']['name'] != null ) {
 					$this->session->set_userdata('message', $this->upload->display_errors());

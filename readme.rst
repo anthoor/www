@@ -8,15 +8,23 @@ CSEDL Manager is a library management software designed exclusively for the mana
 Release Information
 *******************
 
-This repo contains in-development code for future releases. To download stable software, choose from the release list or wait till I finish a release.
+The latest version of CSEDL Manager is v 1.8 release on 23-07-2015. The software is still under testing and should be used with care. Next release will be v2.0 after complete testing of the software.
+
+Meanwhile, you can report any issues you found using `GitHub Issues <https://github.com/lalluanthoor/www/issues>`_ page.
 
 *********
 Changelog
 *********
 
+* Commit: 23-07-2015 8.50PM - Release v1.8
+
+  * Added profile picture for User
+  * Revised DB in ``db_backup`` folder
+  * Fixed UI issues related to profile picture for Librarian
+
 * Commit: 23-07-2015 8.00PM - Release v1.4.3
 
-  * Added profile picture for librarian
+  * Added profile picture for Librarian
 
 * Commit: 20-07-2015 10.10PM - Release v1.3
 
