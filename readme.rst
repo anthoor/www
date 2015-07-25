@@ -16,7 +16,7 @@ Meanwhile, you can report any issues you found using `GitHub Issues <https://git
 Changelog
 *********
 
-* Commit: 25-07-2015 9.20PM - Release v1.9
+* Commit: 25-07-2015 9.30PM - Release v1.9.1
 
   * Enhanced security by improving validation at server side
   * Renamed CI Application and System Folders
@@ -28,7 +28,6 @@ Changelog
   * View code standardized to ``<?= ... ?>`` format for printing
   * User can view his issues only, Librarian can view all
   * Bug fixes
-
 
 * Commit: 23-07-2015 8.50PM - Release v1.8
 
