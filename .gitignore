@@ -9,6 +9,12 @@ user_guide
 uploads/*
 
 # =========================
+# Eclipse Configs
+# =========================
+.project
+.buildpath
+
+# =========================
 # Operating System Files
 # =========================
 
