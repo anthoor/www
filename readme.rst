@@ -16,6 +16,20 @@ Meanwhile, you can report any issues you found using `GitHub Issues <https://git
 Changelog
 *********
 
+* Commit: 25-07-2015 9.20PM - Release v1.9
+
+  * Enhanced security by improving validation at server side
+  * Renamed CI Application and System Folders
+  * Updated DB file in ``db_backup`` folder
+  * Limited renewal of books to a single time, prior to expiration of lease
+  * Imposed maximum limit on number of books to lease
+  * Displays Copy ID in book views and issue views
+  * Separate listing of copies
+  * View code standardized to ``<?= ... ?>`` format for printing
+  * User can view his issues only, Librarian can view all
+  * Bug fixes
+
+
 * Commit: 23-07-2015 8.50PM - Release v1.8
 
   * Added profile picture for User
