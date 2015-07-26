@@ -23,7 +23,10 @@
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">
 					<?= validation_errors() ?>
 				</div>
-				<button class="btn btn-success" style="width: 100%;">Login</button>
+				<button class="btn btn-success" style="width: 100%;">
+					<span class="glyphicon glyphicon-log-in"></span>&nbsp;
+					Login
+				</button>
 			</form>
 		</div>
 	</div>

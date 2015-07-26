@@ -19,7 +19,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-danger" style="width: 30%;">Mark Damaged</button>
+					<button class="btn btn-danger" style="width: 30%;">
+						<span class="glyphicon glyphicon-file"></span>&nbsp;
+						Mark Damaged
+					</button>
 				</div>
 			</form>
 		</div>

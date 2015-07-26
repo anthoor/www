@@ -19,7 +19,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-danger" style="width: 30%;">Remove Copy</button>
+					<button class="btn btn-danger" style="width: 30%;">
+						<span class="glyphicon glyphicon-trash"></span>&nbsp;
+						Remove Copy
+					</button>
 				</div>
 			</form>
 		</div>

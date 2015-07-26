@@ -13,6 +13,7 @@ class Librarian extends CI_Controller {
 		$this->load->model('issue_model');
 		$this->load->model('publisher_model');
 		$this->load->model('return_model');
+		$this->load->model('suggestion_model');
 		$this->load->model('user_model');
 	}
 
@@ -137,6 +138,10 @@ class Librarian extends CI_Controller {
 				case "changepassword":
 					$data['title'] = "Change Password";
 					$data['profile'] = $this->user_model->profile($session_data['id']);
+					break;
+				case "viewsuggestions":
+					$data['title'] = "View Suggestions";
+					$data['suggestions'] = $this->suggestion_model->get();
 					break;
 				default:
 					$this->index();

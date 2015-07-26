@@ -88,6 +88,11 @@ $this->session->unset_userdata('message');
 							<li><a href="/index.php/user/view/viewissues/pending">View Pending Issues</a></li>
 						</ul>
 					</li>
+					<li class="active">
+						<a href="/index.php/user/view/suggestion"><span class="glyphicon glyphicon-list-alt"></span>
+							Suggest Books
+						</a>
+					</li>
 				</ul>
 				<span class="navbar-right">
 					<ul class="nav navbar-nav">

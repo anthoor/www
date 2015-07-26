@@ -16,6 +16,14 @@ Meanwhile, you can report any issues you found using `GitHub Issues <https://git
 Changelog
 *********
 
+* Commit: 26-07-2015 10.00AM - Release v1.9.5
+
+  * Added option for Users to suggest books
+  * Added option for Librarians to view suggestions
+  * Restructured menu for Librarians
+  * Action Icons on buttons for Users and Librarians
+  * Revised DB copy is ``db_backup`` folder
+
 * Commit: 25-07-2015 9.30PM - Release v1.9.1
 
   * Enhanced security by improving validation at server side

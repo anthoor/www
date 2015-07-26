@@ -4,6 +4,7 @@ class User extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->model('suggestion_model');
 		$this->load->model('publisher_model');
 		$this->load->model('issue_model');
 		$this->load->model('book_model');
@@ -31,7 +32,7 @@ class User extends CI_Controller {
 	}
 
 	function view( $page="viewbooks", $args=array(0=>"all") ) {
-		if( !file_exists(APPPATH."/views/librarian/$page.php") ) {
+		if( !file_exists(APPPATH."/views/user/$page.php") ) {
 			show_404();
 		}
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
@@ -87,6 +88,9 @@ class User extends CI_Controller {
 				case "changepassword":
 					$data['title'] = "Change Password";
 					$data['profile'] = $this->user_model->profile($session_data['id']);
+					break;
+				case "suggestion":
+					$data['title'] = "Suggest Book";
 					break;
 			}
 
@@ -156,6 +160,27 @@ class User extends CI_Controller {
 				$this->user_model->update_password( $session_data['id'], $password );
 				$this->session->set_userdata('message', "Password Successfully Updated!");
 				redirect( '/user/view/changepassword', 'redirect' );
+			}
+		} else if( $this->session->userdata('logged_in') ) {
+			redirect( '/librarian', 'refresh' );
+		} else {
+			redirect( '/login', 'refresh' );
+		}
+	}
+
+	function suggestaction() {
+		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] != '10001' ) {
+			if($this->form_validation->run('suggestion') == FALSE) {
+				$this->view("suggestion");
+			} else {
+				$title = $this->input->post('title');
+				$authors = $this->input->post('author');
+				$publisher = $this->input->post('publisher');
+				$edition = $this->input->post('edition');
+				$session_data = $this->session->userdata('logged_in');
+				$this->suggestion_model->add( $session_data['id'], $title, $authors, $publisher, $edition );
+				$this->session->set_userdata('message', "Book suggestion posted successfully! Thank you for the suggestion!");
+				redirect( '/user/view/suggestion', 'redirect' );
 			}
 		} else if( $this->session->userdata('logged_in') ) {
 			redirect( '/librarian', 'refresh' );

@@ -56,7 +56,10 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<button class="btn btn-success" style="width: 30%;">Update Profile</button>
+			<button class="btn btn-success" style="width: 30%;">
+				<span class="glyphicon glyphicon-export"></span>&nbsp;
+				Update Profile
+			</button>
 		</td>
 	</tr>
 </table>

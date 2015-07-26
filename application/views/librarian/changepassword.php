@@ -41,7 +41,10 @@
 	</tr>
 	<tr>
 		<td colspan="3" align="center">
-			<button class="btn btn-warning" style="width: 30%;">Change Password</button>
+			<button class="btn btn-warning" style="width: 30%;">
+				<span class="glyphicon glyphicon-refresh"></span>&nbsp;
+				Change Password
+			</button>
 		</td>
 	</tr>
 </table>

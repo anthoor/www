@@ -21,7 +21,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-success" style="width: 30%;">Revoke Suspension</button>
+					<button class="btn btn-success" style="width: 30%;">
+						<span class="glyphicon glyphicon-saved"></span>&nbsp;
+						Revoke Suspension
+					</button>
 				</div>
 			</form>
 			<?php } else { ?>

@@ -22,7 +22,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-success" style="width: 30%;">Renew Book</button>
+					<button class="btn btn-success" style="width: 30%;">
+						<span class="glyphicon glyphicon-repeat"></span>&nbsp;
+						Renew Book
+					</button>
 				</div>
 			</form>
 		</div>

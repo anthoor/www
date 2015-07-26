@@ -15,10 +15,7 @@ class Login extends CI_Controller {
 			redirect( '/user', 'refresh' );
 		} else {
 			$data['title'] = "Login";
-			$active = array();
-			$active['home'] = "";
-			$active['login'] = "active";
-			$active['view'] = "";
+			$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 			$data['active'] = $active;
 			$data['head'] = '<div class="form-group has-error resize">';
 			$data['tail'] = '</div>';
@@ -32,10 +29,7 @@ class Login extends CI_Controller {
 
 	function view( ) {
 		$data['title'] = "Login";
-		$active = array();
-		$active['home'] = "";
-		$active['login'] = "active";
-		$active['view'] = "";
+		$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 		$data['active'] = $active;
 		$data['head'] = '<div class="form-group has-error resize">';
 		$data['tail'] = '</div>';
@@ -52,10 +46,7 @@ class Login extends CI_Controller {
 		if($this->form_validation->run('verifylogin') == FALSE) {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			$data['title'] = "Login";
-			$active = array();
-			$active['home'] = "";
-			$active['login'] = "active";
-			$active['view'] = "";
+			$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 			$data['active'] = $active;
 			$data['head'] = '<div class="has-error help-block">';
 			$data['tail'] = '</div>';

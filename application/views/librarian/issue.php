@@ -28,7 +28,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-success" style="width: 30%;">Issue Book</button>
+					<button class="btn btn-success" style="width: 30%;">
+						<span class="glyphicon glyphicon-new-window"></span>&nbsp;
+						Issue Book
+					</button>
 				</div>
 			</form>
 		</div>

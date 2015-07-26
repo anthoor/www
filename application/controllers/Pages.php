@@ -1,7 +1,13 @@
 <?php
 class Pages extends CI_Controller {
 
-	public function view( $page = 'home', $args=array() ) {
+	function __construct() {
+		parent::__construct();
+
+		$this->load->library('form_validation');
+	}
+
+	function view( $page = 'home', $args=array() ) {
 
 		if( !file_exists(APPPATH."/views/pages/$page.php") ) {
 			show_404();
@@ -14,14 +20,16 @@ class Pages extends CI_Controller {
 		} else {
 			$data['title'] = ucfirst($page);
 			$data['args'] = $args;
-			$active = array();
-			$active['home'] = "active";
-			$active['login'] = "";
-			$active['view'] = "";
+			$active = array('home'=>'', 'login'=>'', 'view'=>'', 'suggestion'=>'');
+			switch($page) {
+				default:
+					$active['home'] = 'active';
+					break;
+			}
 			$data['active'] = $active;
 
 			$this->load->view('templates/header', $data);
-			$this->load->view("pages/home", $data);
+			$this->load->view("pages/$page", $data);
 			$this->load->view('templates/footer', $data);
 		}
 	}

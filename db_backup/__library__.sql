@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2015 at 05:57 PM
+-- Generation Time: Jul 26, 2015 at 06:27 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -94,7 +94,14 @@ CREATE TABLE IF NOT EXISTS `copy` (
   `shelf` char(1) NOT NULL,
   `row` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000015 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000016 ;
+
+--
+-- Dumping data for table `copy`
+--
+
+INSERT INTO `copy` (`id`, `book_id`, `status`, `shelf`, `row`) VALUES
+(1000000015, 10000001, 'A', 'A', 1);
 
 -- --------------------------------------------------------
 
@@ -109,7 +116,14 @@ CREATE TABLE IF NOT EXISTS `issue` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `renewed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000017 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000018 ;
+
+--
+-- Dumping data for table `issue`
+--
+
+INSERT INTO `issue` (`id`, `copy_id`, `user_id`, `date`, `renewed`) VALUES
+(1000000017, 1000000015, 10004, '2015-07-26 03:45:30', 0);
 
 -- --------------------------------------------------------
 
@@ -156,7 +170,30 @@ CREATE TABLE IF NOT EXISTS `return` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `return_issue_id` (`issue_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `return`
+--
+
+INSERT INTO `return` (`id`, `issue_id`, `date`) VALUES
+(14, 1000000017, '2015-07-26 03:45:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suggestion`
+--
+
+CREATE TABLE IF NOT EXISTS `suggestion` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `user` int(5) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `authors` text NOT NULL,
+  `publisher` varchar(250) NOT NULL,
+  `edition` int(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -176,14 +213,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `valid` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`name`,`email`,`phone`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10003 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10005 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `type_id`, `full_name`, `email`, `phone`, `dpfile`, `valid`) VALUES
-(10001, 'librarian', '5f4dcc3b5aa765d61d8327deb882cf99', 10001, 'CSE Librarian', 'librarian@mitkannur.ac.in', '9876543210', '58a896cac069f91955dfe4b5e4ed84570608e2a9e637f4fae49b8291b0717498397446f01f483145f9ee7f3045bf5b9c9bfd37a598e570f921aebf22944bb630.png', 1);
+(10001, 'librarian', '5f4dcc3b5aa765d61d8327deb882cf99', 10001, 'CSE Librarian', 'librarian@mitkannur.ac.in', '9876543210', '58a896cac069f91955dfe4b5e4ed84570608e2a9e637f4fae49b8291b0717498397446f01f483145f9ee7f3045bf5b9c9bfd37a598e570f921aebf22944bb630.png', 1),
+(10004, 'dummy', '5f4dcc3b5aa765d61d8327deb882cf99', 10002, 'Dummy', 'dummy@mitkannur.ac.in', '9876543210', 'ci.png', 2);
 
 -- --------------------------------------------------------
 

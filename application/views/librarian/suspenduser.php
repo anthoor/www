@@ -21,7 +21,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-warning" style="width: 30%;">Suspend User</button>
+					<button class="btn btn-warning" style="width: 30%;">
+						<span class="glyphicon glyphicon-flash"></span>&nbsp;
+						Suspend User
+					</button>
 				</div>
 			</form>
 			<?php } else { ?>

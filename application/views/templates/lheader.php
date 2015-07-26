@@ -72,24 +72,6 @@ $this->session->unset_userdata('message');
 					</li>
 					<li class="active">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							<span class="glyphicon glyphicon-book"></span>
-							Books
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header">Add Section</li>
-							<li><a href="/index.php/librarian/view/addbook">Add Book</a></li>
-							<li><a href="/index.php/librarian/view/addcopy">Add Copies</a></li>
-							<li><a href="/index.php/librarian/view/addauthor">Add Author</a></li>
-							<li><a href="/index.php/librarian/view/addpublisher">Add Publisher</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Remove Section</li>
-							<li><a href="/index.php/librarian/view/damagecopy">Report Damage</a></li>
-							<li><a href="/index.php/librarian/view/removecopy">Remove Copies</a></li>
-						</ul>
-					</li>
-					<li class="active">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="glyphicon glyphicon-bookmark"></span>
 							Issues
 							<span class="caret"></span>
@@ -105,24 +87,6 @@ $this->session->unset_userdata('message');
 					</li>
 					<li class="active">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							<span class="glyphicon glyphicon-book"></span>
-							View
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header">Book Section</li>
-							<li><a href="/index.php/librarian/view/viewpublishers">View Publishers</a></li>
-							<li><a href="/index.php/librarian/view/viewauthors">View Authors</a></li>
-							<li><a href="/index.php/librarian/view/viewbooks/all">View All Books</a></li>
-							<li><a href="/index.php/librarian/view/viewbooks/available">View Available Books</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Issue Section</li>
-							<li><a href="/index.php/librarian/view/viewissues/all">View Issue History</a></li>
-							<li><a href="/index.php/librarian/view/viewissues/pending">View Pending Issues</a></li>
-						</ul>
-					</li>
-					<li class="active">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="glyphicon glyphicon-user"></span>
 							Users
 							<span class="caret"></span>
@@ -133,6 +97,43 @@ $this->session->unset_userdata('message');
 							<li><a href="/index.php/librarian/view/suspenduser">Suspend User</a></li>
 							<li><a href="/index.php/librarian/view/revokesuspension">Revoke Suspension</a></li>
 							<li><a href="/index.php/librarian/view/removeuser">Remove User</a></li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-book"></span>
+							Books
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Add Section</li>
+							<li><a href="/index.php/librarian/view/addauthor">Add Author</a></li>
+							<li><a href="/index.php/librarian/view/addbook">Add Book</a></li>
+							<li><a href="/index.php/librarian/view/addcopy">Add Copies</a></li>
+							<li><a href="/index.php/librarian/view/addpublisher">Add Publisher</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Remove Section</li>
+							<li><a href="/index.php/librarian/view/damagecopy">Report Damage</a></li>
+							<li><a href="/index.php/librarian/view/removecopy">Remove Copies</a></li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-list-alt"></span>
+							View
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Book Section</li>
+							<li><a href="/index.php/librarian/view/viewpublishers">View Publishers</a></li>
+							<li><a href="/index.php/librarian/view/viewauthors">View Authors</a></li>
+							<li><a href="/index.php/librarian/view/viewbooks/all">View All Books</a></li>
+							<li><a href="/index.php/librarian/view/viewbooks/available">View Available Books</a></li>
+							<li><a href="/index.php/librarian/view/viewsuggestions">View Book Suggestions</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Issue Section</li>
+							<li><a href="/index.php/librarian/view/viewissues/all">View Issue History</a></li>
+							<li><a href="/index.php/librarian/view/viewissues/pending">View Pending Issues</a></li>
 						</ul>
 					</li>
 				</ul>

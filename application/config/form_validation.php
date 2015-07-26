@@ -214,5 +214,27 @@ $config = array(
 					'label'=>'Password',
 					'rules'=>'trim|required|min_length[6]|max_length[32]|callback_check_database'
 				)
+			),
+		'suggestion' => array(
+				array(
+					'field'=>'title',
+					'label'=>'Title',
+					'rules'=>'trim|required|xss_clean|max_length[200]'
+				),
+				array(
+					'field'=>'author',
+					'label'=>'Authors',
+					'rules'=>'trim|required|xss_clean'
+				),
+				array(
+					'field'=>'publisher',
+					'label'=>'Publisher',
+					'rules'=>'trim|required|xss_clean|max_length[200]'
+				),
+				array(
+					'field'=>'edition',
+					'label'=>'Edition',
+					'rules'=>'trim|required|xss_clean|is_natural_no_zero|less_than[1000]'
+				)
 			)
 	);

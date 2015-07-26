@@ -30,7 +30,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-success" style="width: 30%;">Add Author</button>
+					<button class="btn btn-success" style="width: 30%;">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+						Add Author
+					</button>
 				</div>
 			</form>
 		</div>

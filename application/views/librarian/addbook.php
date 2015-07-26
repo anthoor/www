@@ -48,7 +48,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-success" style="width: 30%;">Add Book</button>
+					<button class="btn btn-success" style="width: 30%;">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+						Add Book
+					</button>
 				</div>
 			</form>
 		</div>

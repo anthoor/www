@@ -21,7 +21,10 @@
 					<?= validation_errors() ?>
 				</div>
 				<div align="center">
-					<button class="btn btn-danger" style="width: 30%;">Remove User</button>
+					<button class="btn btn-danger" style="width: 30%;">
+						<span class="glyphicon glyphicon-trash"></span>&nbsp;
+						Remove User
+					</button>
 				</div>
 			</form>
 			<?php } else { ?>

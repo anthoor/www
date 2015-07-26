@@ -11,10 +11,7 @@ class Book extends CI_Controller {
 		$data['title'] = "Availabe Books";
 		$data['books'] = $this->book_model->get_books();
 		$data['authors'] = $this->author_model->get_written();
-		$active = array();
-		$active['home'] = "";
-		$active['login'] = "";
-		$active['view'] = "active";
+		$active = array('home'=>'', 'login'=>'', 'view'=>'active', 'suggestion'=>'');
 		$data['active'] = $active;
 
 		$this->load->helper('url');
@@ -27,10 +24,7 @@ class Book extends CI_Controller {
 		$data['title'] = "Availabe Books";
 		$data['books'] = $this->book_model->get_books();
 		$data['authors'] = $this->author_model->get_written();
-		$active = array();
-		$active['home'] = "";
-		$active['login'] = "";
-		$active['view'] = "active";
+		$active = array('home'=>'', 'login'=>'', 'view'=>'active', 'suggestion'=>'');
 		$data['active'] = $active;
 
 		$this->load->view('templates/header', $data);
