@@ -7,7 +7,7 @@ class Pages extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
-	function view( $page = 'home', $args=array() ) {
+	function view( $page = 'home' ) {
 
 		if( !file_exists(APPPATH."/views/pages/$page.php") ) {
 			show_404();
@@ -19,7 +19,6 @@ class Pages extends CI_Controller {
 			redirect( '/librarian', 'refresh' );
 		} else {
 			$data['title'] = ucfirst($page);
-			$data['args'] = $args;
 			$active = array('home'=>'', 'login'=>'', 'view'=>'', 'suggestion'=>'');
 			switch($page) {
 				default:

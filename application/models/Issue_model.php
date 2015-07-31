@@ -69,4 +69,22 @@ class Issue_model extends CI_Model {
 		}
 		return FALSE;
 	}
+
+	function get_date( $issue ) {
+		$this->db->select('date');
+		$this->db->from('issue');
+		$this->db->where('id', $issue);
+		$query = $this->db->get();
+
+		return $query->result_array()[0]['date'];
+	}
+
+	function get_user( $issue ) {
+		$this->db->select('user_id');
+		$this->db->from('issue');
+		$this->db->where('id', $issue);
+		$query = $this->db->get();
+
+		return $query->result_array()[0]['user_id'];
+	}
 }

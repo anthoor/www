@@ -10,6 +10,7 @@ class Librarian extends CI_Controller {
 		$this->load->model('author_model');
 		$this->load->model('book_model');
 		$this->load->model('copy_model');
+		$this->load->model('fine_model');
 		$this->load->model('issue_model');
 		$this->load->model('publisher_model');
 		$this->load->model('return_model');
@@ -326,11 +327,17 @@ class Librarian extends CI_Controller {
 				$this->view("return");
 			} else {
 				$issues = $this->input->post('issue[]');
+				$message = "All Selected Issues Successfully Returned!<br>";
 				foreach( $issues as $issue ) {
 					$this->return_model->add( $issue );
-					$this->copy_model->return_copy( $this->issue_model->get_copy($issue) );
+					$copy = $this->issue_model->get_copy($issue);
+					$this->copy_model->return_copy( $copy );
+					$fine = $this->fine_model->get_fine($this->issue_model->get_user($issue), $issue);
+					$this->fine_model->add( $issue, $fine );
+					$message .= "Collect Rs. $fine for Book Copy $copy <br>";
 				}
-				$this->session->set_userdata('message', "All Selected Issues Successfully Returned!");
+
+				$this->session->set_userdata('message', $message);
 				redirect( '/librarian/view/return', 'redirect' );
 			}
 		} else if( $this->session->userdata('logged_in') ) {

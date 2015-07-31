@@ -138,4 +138,13 @@ class User_model extends CI_Model {
 		$query = $this->db->query($string);
 		return $query->result_array()[0];
 	}
+
+	public function max_allowed( $user ) {
+		$this->db->select('lease_days');
+		$this->db->from('user, user_type');
+		$this->db->where('user.type_id = user_type.id');
+		$this->db->where('user.id', $user);
+		$query = $this->db->get();
+		return $query->result_array()[0]['lease_days'];
+	}
 }
