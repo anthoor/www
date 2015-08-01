@@ -15,6 +15,15 @@
 							</a>
 						</li>
 					</ul>
+					<span class="navbar-right">
+						<ul class="nav navbar-nav">
+							<li class="navbar-right active">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									page rendered in {elapsed_time} seconds
+								</a>
+							</li>
+						</ul>					
+					</span>
 				</div>
 			</div>
 		</div>

@@ -16,6 +16,11 @@ Meanwhile, you can report any issues you found using `GitHub Issues <https://git
 Changelog
 *********
 
+* Commit: 01-08-2015 9.40PM - Release v2.0.1
+
+  * Added page rendering time to footer
+  * Added Fine for delayed return of books
+
 * Commit: 26-07-2015 10.00AM - Release v1.9.5
 
   * Added option for Users to suggest books

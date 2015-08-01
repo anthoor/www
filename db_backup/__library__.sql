@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2015 at 06:27 AM
+-- Generation Time: Aug 01, 2015 at 06:03 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -28,6 +28,7 @@ USE `library`;
 -- Table structure for table `author`
 --
 
+DROP TABLE IF EXISTS `author`;
 CREATE TABLE IF NOT EXISTS `author` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(80) NOT NULL,
@@ -61,6 +62,7 @@ INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES
 -- Table structure for table `book`
 --
 
+DROP TABLE IF EXISTS `book`;
 CREATE TABLE IF NOT EXISTS `book` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL,
@@ -87,6 +89,7 @@ INSERT INTO `book` (`id`, `title`, `publisher`, `edition`, `year`) VALUES
 -- Table structure for table `copy`
 --
 
+DROP TABLE IF EXISTS `copy`;
 CREATE TABLE IF NOT EXISTS `copy` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `book_id` int(8) NOT NULL,
@@ -106,9 +109,25 @@ INSERT INTO `copy` (`id`, `book_id`, `status`, `shelf`, `row`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fine`
+--
+
+DROP TABLE IF EXISTS `fine`;
+CREATE TABLE IF NOT EXISTS `fine` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `issue_id` int(10) NOT NULL,
+  `amount` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `issue_id` (`issue_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `issue`
 --
 
+DROP TABLE IF EXISTS `issue`;
 CREATE TABLE IF NOT EXISTS `issue` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `copy_id` int(10) NOT NULL,
@@ -116,14 +135,7 @@ CREATE TABLE IF NOT EXISTS `issue` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `renewed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000018 ;
-
---
--- Dumping data for table `issue`
---
-
-INSERT INTO `issue` (`id`, `copy_id`, `user_id`, `date`, `renewed`) VALUES
-(1000000017, 1000000015, 10004, '2015-07-26 03:45:30', 0);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000019 ;
 
 -- --------------------------------------------------------
 
@@ -131,6 +143,7 @@ INSERT INTO `issue` (`id`, `copy_id`, `user_id`, `date`, `renewed`) VALUES
 -- Table structure for table `publisher`
 --
 
+DROP TABLE IF EXISTS `publisher`;
 CREATE TABLE IF NOT EXISTS `publisher` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
@@ -164,20 +177,14 @@ INSERT INTO `publisher` (`id`, `name`) VALUES
 -- Table structure for table `return`
 --
 
+DROP TABLE IF EXISTS `return`;
 CREATE TABLE IF NOT EXISTS `return` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `issue_id` int(10) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `return_issue_id` (`issue_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
-
---
--- Dumping data for table `return`
---
-
-INSERT INTO `return` (`id`, `issue_id`, `date`) VALUES
-(14, 1000000017, '2015-07-26 03:45:55');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -185,6 +192,7 @@ INSERT INTO `return` (`id`, `issue_id`, `date`) VALUES
 -- Table structure for table `suggestion`
 --
 
+DROP TABLE IF EXISTS `suggestion`;
 CREATE TABLE IF NOT EXISTS `suggestion` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `user` int(5) NOT NULL,
@@ -193,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `suggestion` (
   `publisher` varchar(250) NOT NULL,
   `edition` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -201,6 +209,7 @@ CREATE TABLE IF NOT EXISTS `suggestion` (
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -221,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `name`, `password`, `type_id`, `full_name`, `email`, `phone`, `dpfile`, `valid`) VALUES
 (10001, 'librarian', '5f4dcc3b5aa765d61d8327deb882cf99', 10001, 'CSE Librarian', 'librarian@mitkannur.ac.in', '9876543210', '58a896cac069f91955dfe4b5e4ed84570608e2a9e637f4fae49b8291b0717498397446f01f483145f9ee7f3045bf5b9c9bfd37a598e570f921aebf22944bb630.png', 1),
-(10004, 'dummy', '5f4dcc3b5aa765d61d8327deb882cf99', 10002, 'Dummy', 'dummy@mitkannur.ac.in', '9876543210', 'ci.png', 2);
+(10004, 'dummy', '5f4dcc3b5aa765d61d8327deb882cf99', 10002, 'Dummy', 'dummy@mitkannur.ac.in', '9876543210', 'ci.png', 1);
 
 -- --------------------------------------------------------
 
@@ -229,6 +238,7 @@ INSERT INTO `user` (`id`, `name`, `password`, `type_id`, `full_name`, `email`, `
 -- Table structure for table `user_type`
 --
 
+DROP TABLE IF EXISTS `user_type`;
 CREATE TABLE IF NOT EXISTS `user_type` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -254,6 +264,7 @@ INSERT INTO `user_type` (`id`, `name`, `lease_days`, `book_limit`) VALUES
 -- Table structure for table `written`
 --
 
+DROP TABLE IF EXISTS `written`;
 CREATE TABLE IF NOT EXISTS `written` (
   `book_id` int(8) NOT NULL,
   `author_id` int(5) NOT NULL
