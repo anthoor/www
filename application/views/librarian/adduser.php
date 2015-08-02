@@ -29,9 +29,9 @@
 				<div class="form-group">
 					<label for="type">User Type</label>
 					<select name="type" id="type" class="form-control">
-						<?php foreach( $types as $type ) : ?>
-							<option value="<?= $type['id'] ?>"><?= $type['name'] ?></option>
-						<?php endforeach ?>
+						{types}
+							<option value="{id}">{name}</option>
+						{/types}
 					</select>
 				</div>
 				<div class="form-group">

@@ -1,6 +1,6 @@
 <div class="panel panel-info">
 	<div class="panel-heading">
-		<h3 class="panel-title">List of <?= $toggle ?> Issues</h3>
+		<h3 class="panel-title">List of {toggle} Issues</h3>
 	</div>
 </div>
 
@@ -14,23 +14,34 @@
 			<th>Leased On</th>
 		</tr>
 		</thead>
-		<?php $i = 1; ?>
 		<tbody>
-		<?php foreach( $issues as $iss ): ?>
+		{issues}
 			<tr>
-				<td><?= $i ?></td>
-				<td><?= $iss['title']." [".$iss['copy_id']."]" ?></td>
-				<td><?= $iss['full_name'] ?></td>
-				<td><?= explode(" ", $iss['date'])[0] ?></td>
+				<td></td>
+				<td>{title} [{copy_id}]</td>
+				<td>{full_name}</td>
+				<td>{date}</td>
 			</tr>
-			<?php $i++; ?>
-		<?php endforeach ?>
+		{/issues}
 		</tbody>
 	</table>
 	<div style="height:50px;"> &nbsp; </div>
 </div>
 <script>
-$(document).ready(function(){
-	$('#tableid').DataTable();
-});
+$(document).ready(function() {
+    var t = $('#tableid').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
+    } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
 </script>

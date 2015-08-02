@@ -17,11 +17,11 @@
 				<div class="form-group">
 					<label for="authors">Authors</label>
 					<select name="authors[]" id="authors" class="form-control" multiple required>
-						<?php foreach( $bauthors as $author ) : ?>
-							<option value="<?= $author['id'] ?>">
-								<?= $author['first_name']." ".$author['middle_name']." ".$author['last_name'] ?>
+						{bauthors}
+							<option value="{id}">
+								{first_name} {middle_name} {last_name}
 							</option>
-						<?php endforeach ?>
+						{/bauthors}
 					</select>
 				</div>
 				<div class="form-group">
@@ -39,9 +39,9 @@
 				<div class="form-group">
 					<label for="publisher">Publisher</label>
 					<select name="publisher" id="publisher" class="form-control">
-						<?php foreach( $publishers as $publisher ) : ?>
-							<option value="<?= $publisher['id'] ?>"><?= $publisher['name'] ?></option>
-						<?php endforeach ?>
+						{publishers}
+							<option value="{id}">{name}</option>
+						{/publishers}
 					</select>
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">

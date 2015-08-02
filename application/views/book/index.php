@@ -13,14 +13,14 @@
 		</tr>
 		</thead>
 		<tbody>
-		<?php while( $book = $books->unbuffered_row() ): ?>
+		{books}
 			<tr>
-				<td><?= $book->title." - Ed. ".$book->edition." [".$book->copyid."]" ?></td>
-				<td><?= $authors[$book->id] ?></td>
-				<td><?= $book->pub ?></td>
-				<td><?= $book->shelf."/".$book->row ?></td>
+				<td>{btitle} - Ed. {edition} [{copyid}]</td>
+				<td>{authors}</td>
+				<td>{pub}</td>
+				<td>{shelf}/{row}</td>
 			</tr>
-		<?php endwhile ?>
+		{/books}
 		</tbody>
 	</table>
 	<div style="height:50px;"> &nbsp; </div>

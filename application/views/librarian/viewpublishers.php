@@ -8,27 +8,38 @@
 	<table class="table table-bordered table-hover" id="tableid">
 		<thead>
 		<tr>
-			<th width="50">Sl No</th>
+			<th width="50px">Sl No</th>
 			<th>Publisher</th>
 			<th>No of Titles</th>
 		</tr>
 		</thead>
 		<tbody>
-		<?php $i = 1; ?>
-		<?php foreach( $publishers as $pub ): ?>
+		{publishers}
 			<tr>
-				<td><?= $i ?></td>
-				<td><?= $pub['name'] ?></td>
-				<td><?= $pub['count'] ?></td>
+				<td></td>
+				<td>{name}</td>
+				<td>{count}</td>
 			</tr>
-			<?php $i++; ?>
-		<?php endforeach ?>
+		{/publishers}
 		</tbody>
 	</table>
 	<div style="height:50px;"> &nbsp; </div>
 </div>
 <script>
-$(document).ready(function(){
-	$('#tableid').DataTable();
-});
+$(document).ready(function() {
+    var t = $('#tableid').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
+    } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
 </script>

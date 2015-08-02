@@ -16,6 +16,11 @@ Meanwhile, you can report any issues you found using `GitHub Issues <https://git
 Changelog
 *********
 
+* Commit: 02-08-2015 9.20AM - Release v2.1
+
+  * switched from PHP to Template Parser (neat code in views)
+  * minor bug fixes in controllers
+
 * Commit: 01-08-2015 9.40PM - Release v2.0.1
 
   * Added page rendering time to footer

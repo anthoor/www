@@ -11,11 +11,11 @@
 				<div class="form-group">
 					<label for="issue">Issues</label>
 					<select name="issue[]" id="issue" class="form-control" style="height:200px;" multiple required>
-						<?php foreach( $issues as $issue ): ?>
-							<option value="<?= $issue['id'] ?>">
-								<?= $issue['title']." leased by ".$issue['full_name']." [".$issue['copy_id']."]" ?>
+						{issues}
+							<option value="{id}">
+								{title} leased by {full_name} [{copy_id}]
 							</option>
-						<?php endforeach ?>
+						{/issues}
 					</select>
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">

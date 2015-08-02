@@ -4,8 +4,7 @@ class Login extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model');
-		$data['head'] = '<div class="form-group has-error resize">';
-		$data['tail'] = '</div>';
+		$this->load->library('parser');
 	}
 
 	function index( ) {
@@ -17,8 +16,6 @@ class Login extends CI_Controller {
 			$data['title'] = "Login";
 			$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 			$data['active'] = $active;
-			$data['head'] = '<div class="form-group has-error resize">';
-			$data['tail'] = '</div>';
 
 			$this->load->helper( array('form') );
 			$this->load->view('templates/header', $data);
@@ -31,8 +28,6 @@ class Login extends CI_Controller {
 		$data['title'] = "Login";
 		$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 		$data['active'] = $active;
-		$data['head'] = '<div class="form-group has-error resize">';
-		$data['tail'] = '</div>';
 
 		$this->load->helper( array('form') );
 		$this->load->view('templates/header', $data);
@@ -48,8 +43,6 @@ class Login extends CI_Controller {
 			$data['title'] = "Login";
 			$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 			$data['active'] = $active;
-			$data['head'] = '<div class="has-error help-block">';
-			$data['tail'] = '</div>';
 
 			$this->load->helper( array('form') );
 			$this->load->view('templates/header', $data);

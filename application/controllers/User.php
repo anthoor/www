@@ -11,7 +11,9 @@ class User extends CI_Controller {
 		$this->load->model('author_model');
 
 		$this->load->helper('form');
+
 		$this->load->library('form_validation');
+		$this->load->library('parser');
 	}
 
 	function index() {
@@ -21,9 +23,9 @@ class User extends CI_Controller {
 
 			$data['title'] = "User Home";
 
-			$this->load->view('templates/uheader', $data);
-			$this->load->view("user/home", $data);
-			$this->load->view('templates/ufooter', $data);
+			$this->parser->parse('templates/uheader', $data);
+			$this->parser->parse("user/home", $data);
+			$this->parser->parse('templates/ufooter', $data);
 		} else if( $this->session->userdata('logged_in') ) {
 			redirect( '/librarian', 'refresh' );
 		} else {
@@ -79,7 +81,10 @@ class User extends CI_Controller {
 					break;
 				case "viewprofile":
 					$data['title'] = "Profile";
-					$data['profile'] = $this->user_model->profile($session_data['id']);
+					$profile = $this->user_model->profile($session_data['id']);
+					foreach ($profile as $key => $value) {
+						$data[$key]=$value;
+					}
 					break;
 				case "editprofile":
 					$data['title'] = "Update Profile";
@@ -94,9 +99,9 @@ class User extends CI_Controller {
 					break;
 			}
 
-			$this->load->view('templates/uheader', $data);
-			$this->load->view("user/$page", $data);
-			$this->load->view('templates/ufooter', $data);
+			$this->parser->parse('templates/uheader', $data);
+			$this->parser->parse("user/$page", $data);
+			$this->parser->parse('templates/ufooter', $data);
 		} else if( $this->session->userdata('logged_in') ) {
 			redirect( '/librarian', 'refresh' );
 		} else {

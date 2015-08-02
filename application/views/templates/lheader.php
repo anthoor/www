@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo $title; ?></title>
+		<title>{title}</title>
 		<link rel="stylesheet" type="text/css" href="<?= base_url()."css/readable.css" ?>" />
 		<link rel="stylesheet" type="text/css" href="<?= base_url()."css/datatables.bootstrap.css" ?>" />
 		<link rel="stylesheet" type="text/css" href="<?= base_url()."css/jasny.css" ?>" />
@@ -142,7 +142,7 @@ $this->session->unset_userdata('message');
 						<li class="dropdown navbar-right active">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span class="glyphicon glyphicon-cog"></span>
-								<span style="font-weight:bold;"><?= $realname ?></span>
+								<span style="font-weight:bold;">{realname}</span>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">

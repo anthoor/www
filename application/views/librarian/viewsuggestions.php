@@ -15,14 +15,14 @@
 		</tr>
 		</thead>
 		<tbody>
-		<?php foreach( $suggestions as $suggestion ): ?>
+		{suggestions}
 			<tr>
-				<td><?= $suggestion['title']." - Ed. ".$suggestion['edition'] ?></td>
-				<td><?= $suggestion['authors'] ?></td>
-				<td><?= $suggestion['publisher'] ?></td>
-				<td><?= $suggestion['name'] ?></td>
+				<td>{title} - Ed. {edition}</td>
+				<td>{authors}</td>
+				<td>{publisher}</td>
+				<td>{name}</td>
 			</tr>
-		<?php endforeach ?>
+		{/suggestions}
 		</tbody>
 	</table>
 	<div style="height:50px;"> &nbsp; </div>

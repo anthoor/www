@@ -6,6 +6,7 @@ class Librarian extends CI_Controller {
 		$this->load->helper( 'form' );
 
 		$this->load->library('form_validation');
+		$this->load->library('parser');
 
 		$this->load->model('author_model');
 		$this->load->model('book_model');
@@ -24,9 +25,9 @@ class Librarian extends CI_Controller {
 			$data['realname'] = $this->user_model->get_username( $session_data['id'] );
 			$data['title'] = "Librarian Home";
 
-			$this->load->view('templates/lheader', $data);
-			$this->load->view("librarian/index", $data);
-			$this->load->view('templates/lfooter', $data);
+			$this->parser->parse('templates/lheader', $data);
+			$this->parser->parse('librarian/index', $data);
+			$this->parser->parse('templates/lfooter', $data);
 		} else if( $this->session->userdata('logged_in') ) {
 			redirect( '/user', 'refresh' );
 		} else {
@@ -44,7 +45,6 @@ class Librarian extends CI_Controller {
 
 			switch( $page ) {
 				case "viewbooks":
-					$data['authors'] = $this->author_model->get_written();
 					switch( $args ) {
 						case "available":
 							$data['title'] = "View Available Books";
@@ -64,6 +64,7 @@ class Librarian extends CI_Controller {
 				case "viewpublishers":
 					$data['title'] = "View Publishers";
 					$data['publishers'] = $this->publisher_model->get();
+					error_log(print_r($data['publishers'],TRUE));
 					break;
 				case "viewissues":	
 					switch( $args ) {
@@ -86,7 +87,6 @@ class Librarian extends CI_Controller {
 				case "addcopy":
 					$data['title'] = "Add Book Copies";
 					$data['books'] = $this->book_model->books();
-					$data['authors'] = $this->author_model->get_written();
 					break;
 				case "addauthor":
 					$data['title'] = "Add Author";
@@ -130,7 +130,10 @@ class Librarian extends CI_Controller {
 					break;
 				case "viewprofile":
 					$data['title'] = "Profile";
-					$data['profile'] = $this->user_model->profile($session_data['id']);
+					$profile = $this->user_model->profile($session_data['id']);
+					foreach ($profile as $key => $value) {
+						$data[$key]=$value;
+					}
 					break;
 				case "editprofile":
 					$data['title'] = "Update Profile";
@@ -148,9 +151,9 @@ class Librarian extends CI_Controller {
 					$this->index();
 			}
 			
-			$this->load->view('templates/lheader', $data);
-			$this->load->view("librarian/$page", $data);
-			$this->load->view('templates/lfooter', $data);
+			$this->parser->parse('templates/lheader', $data);
+			$this->parser->parse("librarian/$page", $data);
+			$this->parser->parse('templates/lfooter', $data);
 		}  else if( $this->session->userdata('logged_in') ) {
 			redirect( '/user', 'refresh' );
 		} else {

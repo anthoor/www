@@ -1,10 +1,10 @@
 <div class="panel panel-info">
 	<div class="panel-heading">
-		<h3 class="panel-title">List of <?= $toggle ?> Books</h3>
+		<h3 class="panel-title">List of {toggle} Books</h3>
 	</div>
 </div>
 
-<div>
+<div class="">
 	<table class="table table-bordered table-hover" id="tableid">
 		<thead>
 		<tr>
@@ -15,14 +15,14 @@
 		</tr>
 		</thead>
 		<tbody>
-		<?php while( $book = $books->unbuffered_row() ): ?>
+		{books}
 			<tr>
-				<td><?= $book->title." - Ed. ".$book->edition." [".$book->copyid."]" ?></td>
-				<td><?= $authors[$book->id] ?></td>
-				<td><?= $book->pub ?></td>
-				<td><?= $book->shelf."/".$book->row ?></td>
+				<td>{btitle} - Ed. {edition} [{copyid}]</td>
+				<td>{authors}</td>
+				<td>{pub}</td>
+				<td>{shelf}/{row}</td>
 			</tr>
-		<?php endwhile ?>
+		{/books}
 		</tbody>
 	</table>
 	<div style="height:50px;"> &nbsp; </div>

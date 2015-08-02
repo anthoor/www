@@ -12,9 +12,9 @@
 				<div class="form-group">
 					<label for="user">User</label>
 					<select name="user" id="user" class="form-control">
-						<?php foreach( $users as $user ) : ?>
-							<option value="<?= $user['id'] ?>"><?= $user['full_name']." (".$user['name'].")" ?></option>
-						<?php endforeach ?>
+						{users}
+							<option value="{id}">{full_name} ({name})</option>
+						{/users}
 					</select>
 				</div>
 				<div style="color:#f00 !important; font-size:14px !important; font-weight:bold !important;">

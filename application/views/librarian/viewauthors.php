@@ -14,21 +14,32 @@
 		</tr>
 		</thead>
 		<tbody>
-		<?php $i = 1; ?>
-		<?php foreach( $bauthors as $author ): ?>
+		{bauthors}
 			<tr>
-				<td><?= $i ?></td>
-				<td><?= $author['first_name']." ".$author['middle_name']." ".$author['last_name'] ?></td>
-				<td><?= $author['count'] ?></td>
+				<td></td>
+				<td>{first_name} {middle_name} {last_name}</td>
+				<td>{count}</td>
 			</tr>
-			<?php $i++; ?>
-		<?php endforeach ?>
+		{/bauthors}
 		</tbody>
 	</table>
 	<div style="height:50px;"> &nbsp; </div>
 </div>
 <script>
-$(document).ready(function(){
-	$('#tableid').DataTable();
-});
+$(document).ready(function() {
+    var t = $('#tableid').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
+    } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
 </script>

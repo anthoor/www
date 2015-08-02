@@ -12,12 +12,11 @@
 				<div class="form-group">
 					<label for="title">Title</label>
 					<select name="title" id="title" class="form-control">
-						<?php $bbooks = $books->result_array(); ?>
-						<?php foreach( $bbooks as $book ) : ?>
-							<option value="<?= $book['id'] ?>" title="<?= $authors[$book['id']] ?>">
-								<?= $book['title']." [".$book['pub'].", Ed. ".$book['edition'].", ".$book['year']."]" ?>
+						{books}
+							<option value="{id}" title="{authors}">
+								{btitle} [{pub}, Ed. {edition}, {year}]
 							</option>
-						<?php endforeach ?>
+						{/books}
 					</select>
 				</div>
 				<div class="form-group">

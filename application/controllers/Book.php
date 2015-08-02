@@ -5,6 +5,8 @@ class Book extends CI_Controller {
 		parent::__construct();
 		$this->load->model('book_model');
 		$this->load->model('author_model');
+
+		$this->load->library('parser');
 	}
 
 	public function index() {
@@ -15,9 +17,9 @@ class Book extends CI_Controller {
 		$data['active'] = $active;
 
 		$this->load->helper('url');
-		$this->load->view('templates/header', $data);
-		$this->load->view('book/index', $data);
-		$this->load->view('templates/footer', $data);
+		$this->parser->parse('templates/header', $data);
+		$this->parser->parse('book/index', $data);
+		$this->parser->parse('templates/footer', $data);
 	}
 
 	public function view() {
@@ -27,8 +29,8 @@ class Book extends CI_Controller {
 		$active = array('home'=>'', 'login'=>'', 'view'=>'active', 'suggestion'=>'');
 		$data['active'] = $active;
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('book/index', $data);
-		$this->load->view('templates/footer', $data);
+		$this->parser->parse('templates/header', $data);
+		$this->parser->parse('book/index', $data);
+		$this->parser->parse('templates/footer', $data);
 	}
 }

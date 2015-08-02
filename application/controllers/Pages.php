@@ -5,6 +5,7 @@ class Pages extends CI_Controller {
 		parent::__construct();
 
 		$this->load->library('form_validation');
+		$this->load->library('parser');
 	}
 
 	function view( $page = 'home' ) {
