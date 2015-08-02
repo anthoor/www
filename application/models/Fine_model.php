@@ -40,9 +40,7 @@ class Fine_model extends CI_Model {
 		$max = $this->user_model->max_allowed( $user );
 
 		$v = $difference->format("%a");
-		error_log($v);
-		error_log($max);
-		error_log($v - $max);
+		
 		return $difference->format("%a")-$max;
 	}
 

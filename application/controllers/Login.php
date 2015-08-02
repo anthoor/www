@@ -4,7 +4,6 @@ class Login extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model');
-		$this->load->library('parser');
 	}
 
 	function index( ) {
@@ -17,10 +16,9 @@ class Login extends CI_Controller {
 			$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 			$data['active'] = $active;
 
-			$this->load->helper( array('form') );
-			$this->load->view('templates/header', $data);
-			$this->load->view("pages/login", $data);
-			$this->load->view('templates/footer', $data);
+			$this->parser->parse('templates/header', $data);
+			$this->parser->parse("pages/login", $data);
+			$this->parser->parse('templates/footer', $data);
 		}
 	}
 
@@ -29,14 +27,12 @@ class Login extends CI_Controller {
 		$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 		$data['active'] = $active;
 
-		$this->load->helper( array('form') );
-		$this->load->view('templates/header', $data);
-		$this->load->view("pages/login", $data);
-		$this->load->view('templates/footer', $data);
+		$this->parser->parse('templates/header', $data);
+		$this->parser->parse("pages/login", $data);
+		$this->parser->parse('templates/footer', $data);
 	}
 
 	function verifylogin() {
-		$this->load->library('form_validation');
 
 		if($this->form_validation->run('verifylogin') == FALSE) {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
@@ -44,10 +40,9 @@ class Login extends CI_Controller {
 			$active = array('home'=>'', 'login'=>'active', 'view'=>'', 'suggestion'=>'');
 			$data['active'] = $active;
 
-			$this->load->helper( array('form') );
-			$this->load->view('templates/header', $data);
-			$this->load->view("pages/login", $data);
-			$this->load->view('templates/footer', $data);
+			$this->parser->parse('templates/header', $data);
+			$this->parser->parse("pages/login", $data);
+			$this->parser->parse('templates/footer', $data);
 		} else {
 			if( $this->session->userdata('logged_in')['type'] != '10001' )
 				redirect( '/user', 'refresh' );

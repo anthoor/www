@@ -27,19 +27,19 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="<?= $active['home'] ?>">
-						<a href="/index.php">
+						<a href="/">
 							<span class="glyphicon glyphicon-home"></span>
 							Home
 						</a>
 					</li>
 					<li class="<?= $active['login'] ?>">
-						<a href="/index.php/login/">
+						<a href="/login">
 							<span class="glyphicon glyphicon-edit"></span>
 							Login
 						</a>
 					</li>
 					<li class="<?= $active['view'] ?>">
-						<a href="/index.php/book/"><span class="glyphicon glyphicon-list-alt"></span>
+						<a href="/book"><span class="glyphicon glyphicon-list-alt"></span>
 							View Books
 						</a>
 					</li>

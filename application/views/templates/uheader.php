@@ -58,14 +58,14 @@ $this->session->unset_userdata('message');
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/index.php/user">
+				<a class="navbar-brand" href="/user">
 					<img src="<?= base_url()."css/logo.png" ?>" alt="csdl" height="25px" />csdl
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a href="/index.php/user">
+						<a href="/user">
 							<span class="glyphicon glyphicon-home"></span>
 							Home
 						</a>
@@ -78,18 +78,18 @@ $this->session->unset_userdata('message');
 						</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Book Section</li>
-							<li><a href="/index.php/user/view/viewpublishers">View Publishers</a></li>
-							<li><a href="/index.php/user/view/viewauthors">View Authors</a></li>
-							<li><a href="/index.php/user/view/viewbooks/all">View All Books</a></li>
-							<li><a href="/index.php/user/view/viewbooks/available">View Available Books</a></li>
+							<li><a href="/user/view/viewpublishers">View Publishers</a></li>
+							<li><a href="/user/view/viewauthors">View Authors</a></li>
+							<li><a href="/user/view/viewbooks/all">View All Books</a></li>
+							<li><a href="/user/view/viewbooks/available">View Available Books</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Issue Section</li>
-							<li><a href="/index.php/user/view/viewissues/all">View Issue History</a></li>
-							<li><a href="/index.php/user/view/viewissues/pending">View Pending Issues</a></li>
+							<li><a href="/user/view/viewissues/all">View Issue History</a></li>
+							<li><a href="/user/view/viewissues/pending">View Pending Issues</a></li>
 						</ul>
 					</li>
 					<li class="active">
-						<a href="/index.php/user/view/suggestion"><span class="glyphicon glyphicon-list-alt"></span>
+						<a href="/user/view/suggestion"><span class="glyphicon glyphicon-list-alt"></span>
 							Suggest Books
 						</a>
 					</li>
@@ -104,12 +104,12 @@ $this->session->unset_userdata('message');
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">Profile Actions</li>
-								<li><a href="/index.php/user/view/viewprofile">View Profile</a></li>
-								<li><a href="/index.php/user/view/editprofile">Edit Profile</a></li>
-								<li><a href="/index.php/user/view/changepassword">Change Password</a></li>
+								<li><a href="/user/view/viewprofile">View Profile</a></li>
+								<li><a href="/user/view/editprofile">Edit Profile</a></li>
+								<li><a href="/user/view/changepassword">Change Password</a></li>
 								<li role="separator" class="divider"></li>
 								<li class="dropdown-header">User Actions</li>
-								<li><a href="/index.php/login/logout">Logout</a></li>
+								<li><a href="/login/logout">Logout</a></li>
 							</ul>
 						</li>
 					</ul>

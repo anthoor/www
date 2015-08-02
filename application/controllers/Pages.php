@@ -1,13 +1,6 @@
 <?php
 class Pages extends CI_Controller {
 
-	function __construct() {
-		parent::__construct();
-
-		$this->load->library('form_validation');
-		$this->load->library('parser');
-	}
-
 	function view( $page = 'home' ) {
 
 		if( !file_exists(APPPATH."/views/pages/$page.php") ) {
@@ -28,9 +21,9 @@ class Pages extends CI_Controller {
 			}
 			$data['active'] = $active;
 
-			$this->load->view('templates/header', $data);
-			$this->load->view("pages/$page", $data);
-			$this->load->view('templates/footer', $data);
+			$this->parser->parse('templates/header', $data);
+			$this->parser->parse("pages/$page", $data);
+			$this->parser->parse('templates/footer', $data);
 		}
 	}
 }

@@ -5,8 +5,6 @@ class Book extends CI_Controller {
 		parent::__construct();
 		$this->load->model('book_model');
 		$this->load->model('author_model');
-
-		$this->load->library('parser');
 	}
 
 	public function index() {

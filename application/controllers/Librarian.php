@@ -3,10 +3,6 @@
 class Librarian extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->helper( 'form' );
-
-		$this->load->library('form_validation');
-		$this->load->library('parser');
 
 		$this->load->model('author_model');
 		$this->load->model('book_model');
@@ -64,7 +60,6 @@ class Librarian extends CI_Controller {
 				case "viewpublishers":
 					$data['title'] = "View Publishers";
 					$data['publishers'] = $this->publisher_model->get();
-					error_log(print_r($data['publishers'],TRUE));
 					break;
 				case "viewissues":	
 					switch( $args ) {

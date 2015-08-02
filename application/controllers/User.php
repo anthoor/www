@@ -9,11 +9,6 @@ class User extends CI_Controller {
 		$this->load->model('issue_model');
 		$this->load->model('book_model');
 		$this->load->model('author_model');
-
-		$this->load->helper('form');
-
-		$this->load->library('form_validation');
-		$this->load->library('parser');
 	}
 
 	function index() {
@@ -74,7 +69,6 @@ class User extends CI_Controller {
 							break;
 						default:
 							$data['title'] = "View All Issues";
-							error_log($session_data['id']);
 							$data['issues'] = $this->issue_model->get( $session_data['id'] );
 							$data['toggle'] = "All";
 					}

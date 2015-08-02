@@ -16,6 +16,13 @@ Meanwhile, you can report any issues you found using `GitHub Issues <https://git
 Changelog
 *********
 
+* Commit: 02-08-2015 10.45AM - Release v2.1.1
+
+  * cleared debug messages
+  * added ``.htaccess`` to remove ``index.php`` from URL, this feature required ``mod_rewrite`` module
+  * updated links to remove ``index.php``
+  * added autoload for libraries
+
 * Commit: 02-08-2015 9.20AM - Release v2.1
 
   * switched from PHP to Template Parser (neat code in views)

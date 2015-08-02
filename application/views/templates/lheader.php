@@ -58,14 +58,14 @@ $this->session->unset_userdata('message');
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/index.php/librarian">
+				<a class="navbar-brand" href="/librarian">
 					<img src="<?= base_url()."css/logo.png" ?>" alt="csdl" height="25px" />csdl
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a href="/index.php/librarian">
+						<a href="/librarian">
 							<span class="glyphicon glyphicon-home"></span>
 							Home
 						</a>
@@ -78,11 +78,11 @@ $this->session->unset_userdata('message');
 						</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Issue Section</li>
-							<li><a href="/index.php/librarian/view/issue">Issue Book</a></li>
-							<li><a href="/index.php/librarian/view/renew">Renew Book</a></li>
+							<li><a href="/librarian/view/issue">Issue Book</a></li>
+							<li><a href="/librarian/view/renew">Renew Book</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Return Section</li>
-							<li><a href="/index.php/librarian/view/return">Return Book</a></li>
+							<li><a href="/librarian/view/return">Return Book</a></li>
 						</ul>
 					</li>
 					<li class="active">
@@ -93,10 +93,10 @@ $this->session->unset_userdata('message');
 						</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Management Section</li>
-							<li><a href="/index.php/librarian/view/adduser">Add User</a></li>
-							<li><a href="/index.php/librarian/view/suspenduser">Suspend User</a></li>
-							<li><a href="/index.php/librarian/view/revokesuspension">Revoke Suspension</a></li>
-							<li><a href="/index.php/librarian/view/removeuser">Remove User</a></li>
+							<li><a href="/librarian/view/adduser">Add User</a></li>
+							<li><a href="/librarian/view/suspenduser">Suspend User</a></li>
+							<li><a href="/librarian/view/revokesuspension">Revoke Suspension</a></li>
+							<li><a href="/librarian/view/removeuser">Remove User</a></li>
 						</ul>
 					</li>
 					<li class="active">
@@ -107,14 +107,14 @@ $this->session->unset_userdata('message');
 						</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Add Section</li>
-							<li><a href="/index.php/librarian/view/addauthor">Add Author</a></li>
-							<li><a href="/index.php/librarian/view/addbook">Add Book</a></li>
-							<li><a href="/index.php/librarian/view/addcopy">Add Copies</a></li>
-							<li><a href="/index.php/librarian/view/addpublisher">Add Publisher</a></li>
+							<li><a href="/librarian/view/addauthor">Add Author</a></li>
+							<li><a href="/librarian/view/addbook">Add Book</a></li>
+							<li><a href="/librarian/view/addcopy">Add Copies</a></li>
+							<li><a href="/librarian/view/addpublisher">Add Publisher</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Remove Section</li>
-							<li><a href="/index.php/librarian/view/damagecopy">Report Damage</a></li>
-							<li><a href="/index.php/librarian/view/removecopy">Remove Copies</a></li>
+							<li><a href="/librarian/view/damagecopy">Report Damage</a></li>
+							<li><a href="/librarian/view/removecopy">Remove Copies</a></li>
 						</ul>
 					</li>
 					<li class="active">
@@ -125,15 +125,15 @@ $this->session->unset_userdata('message');
 						</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Book Section</li>
-							<li><a href="/index.php/librarian/view/viewpublishers">View Publishers</a></li>
-							<li><a href="/index.php/librarian/view/viewauthors">View Authors</a></li>
-							<li><a href="/index.php/librarian/view/viewbooks/all">View All Books</a></li>
-							<li><a href="/index.php/librarian/view/viewbooks/available">View Available Books</a></li>
-							<li><a href="/index.php/librarian/view/viewsuggestions">View Book Suggestions</a></li>
+							<li><a href="/librarian/view/viewpublishers">View Publishers</a></li>
+							<li><a href="/librarian/view/viewauthors">View Authors</a></li>
+							<li><a href="/librarian/view/viewbooks/all">View All Books</a></li>
+							<li><a href="/librarian/view/viewbooks/available">View Available Books</a></li>
+							<li><a href="/librarian/view/viewsuggestions">View Book Suggestions</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Issue Section</li>
-							<li><a href="/index.php/librarian/view/viewissues/all">View Issue History</a></li>
-							<li><a href="/index.php/librarian/view/viewissues/pending">View Pending Issues</a></li>
+							<li><a href="/librarian/view/viewissues/all">View Issue History</a></li>
+							<li><a href="/librarian/view/viewissues/pending">View Pending Issues</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -147,12 +147,12 @@ $this->session->unset_userdata('message');
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">Profile Actions</li>
-								<li><a href="/index.php/librarian/view/viewprofile">View Profile</a></li>
-								<li><a href="/index.php/librarian/view/editprofile">Edit Profile</a></li>
-								<li><a href="/index.php/librarian/view/changepassword">Change Password</a></li>
+								<li><a href="/librarian/view/viewprofile">View Profile</a></li>
+								<li><a href="/librarian/view/editprofile">Edit Profile</a></li>
+								<li><a href="/librarian/view/changepassword">Change Password</a></li>
 								<li role="separator" class="divider"></li>
 								<li class="dropdown-header">User Actions</li>
-								<li><a href="/index.php/login/logout">Logout</a></li>
+								<li><a href="/login/logout">Logout</a></li>
 							</ul>
 						</li>
 					</ul>
