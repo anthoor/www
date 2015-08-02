@@ -19,7 +19,7 @@ Changelog
 * Commit: 02-08-2015 10.45AM - Release v2.1.1
 
   * cleared debug messages
-  * added ``.htaccess`` to remove ``index.php`` from URL, this feature required ``mod_rewrite`` module
+  * added ``.htaccess`` to remove ``index.php`` from URL, this feature requires ``mod_rewrite`` module
   * updated links to remove ``index.php``
   * added autoload for libraries
 
@@ -32,6 +32,7 @@ Changelog
 
   * Added page rendering time to footer
   * Added Fine for delayed return of books
+  * Updated DB in ``db_backup`` folder
 
 * Commit: 26-07-2015 10.00AM - Release v1.9.5
 
