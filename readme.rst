@@ -40,7 +40,7 @@ Changelog
   * Added option for Librarians to view suggestions
   * Restructured menu for Librarians
   * Action Icons on buttons for Users and Librarians
-  * Revised DB copy is ``db_backup`` folder
+  * Revised DB copy in ``db_backup`` folder
 
 * Commit: 25-07-2015 9.30PM - Release v1.9.1
 
