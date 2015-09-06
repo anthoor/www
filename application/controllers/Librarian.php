@@ -286,9 +286,13 @@ class Librarian extends CI_Controller {
 			} else {
 				$user = $this->input->post('user');
 				$copies = $this->input->post('copyid');
-				$this->issue_model->add( $user, $copies );
-				$this->copy_model->lease( $copies );
-				$this->session->set_userdata('message', "Copy ID <strong>$copies</strong> Successfully Issued!");
+				if( is_reserved_user( $user, $copies ) ) {
+					$this->issue_model->add( $user, $copies );
+					$this->copy_model->lease( $copies );
+					$this->session->set_userdata('message', "Copy ID <strong>$copies</strong> Successfully Issued!");
+				} else {
+					$this->session->set_userdata('message', "Copy ID <strong>$copies</strong> cannot be issued. Someone else has reserved it.");
+				}
 				redirect( '/librarian/view/issue', 'refresh' );
 			}
 		} else if( $this->session->userdata('logged_in') ) {
@@ -426,8 +430,10 @@ class Librarian extends CI_Controller {
 		if( $this->session->userdata('logged_in') && $this->session->userdata('logged_in')['type'] == '10001' ) {
 
 			$session_data = $this->session->userdata('logged_in');
+			$id = $session_data['id'];
+			$id .= openssl_random_pseudo_bytes(25);
 
-			$imgname = hash( "sha512", $session_data['id'], FALSE );
+			$imgname = hash( "sha512", $id, FALSE );
 
 			$config['upload_path'] = './uploads/';
 			$config['file_name'] = $imgname;
@@ -539,5 +545,9 @@ class Librarian extends CI_Controller {
 		}
 		$this->form_validation->set_message( 'email_check', 'E Mail already in use' );
 		return FALSE;
+	}
+
+	function is_reserved_user( $user, $copy ) {
+		//
 	}
 }

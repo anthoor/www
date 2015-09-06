@@ -97,14 +97,14 @@ CREATE TABLE IF NOT EXISTS `copy` (
   `shelf` char(1) NOT NULL,
   `row` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000016 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000002 ;
 
 --
 -- Dumping data for table `copy`
 --
 
 INSERT INTO `copy` (`id`, `book_id`, `status`, `shelf`, `row`) VALUES
-(1000000015, 10000001, 'A', 'A', 1);
+(1000000001, 10000001, 'A', 'A', 1);
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `fine` (
   `amount` int(5) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `issue_id` (`issue_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10000001 ;
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `issue` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `renewed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000019 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000001 ;
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `return` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `return_issue_id` (`issue_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000000001 ;
 
 -- --------------------------------------------------------
 
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `suggestion` (
   `publisher` varchar(250) NOT NULL,
   `edition` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=10000001 ;
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `valid` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`name`,`email`,`phone`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10005 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10003 ;
 
 --
 -- Dumping data for table `user`
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `name`, `password`, `type_id`, `full_name`, `email`, `phone`, `dpfile`, `valid`) VALUES
 (10001, 'librarian', '5f4dcc3b5aa765d61d8327deb882cf99', 10001, 'CSE Librarian', 'librarian@mitkannur.ac.in', '9876543210', '58a896cac069f91955dfe4b5e4ed84570608e2a9e637f4fae49b8291b0717498397446f01f483145f9ee7f3045bf5b9c9bfd37a598e570f921aebf22944bb630.png', 1),
-(10004, 'dummy', '5f4dcc3b5aa765d61d8327deb882cf99', 10002, 'Dummy', 'dummy@mitkannur.ac.in', '9876543210', 'ci.png', 1);
+(10002, 'dummy', '5f4dcc3b5aa765d61d8327deb882cf99', 10002, 'Dummy', 'dummy@mitkannur.ac.in', '9876543210', 'ci.png', 1);
 
 -- --------------------------------------------------------
 
